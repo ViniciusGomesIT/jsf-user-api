@@ -1,0 +1,30 @@
+server:
+  port: 8081
+  
+spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        trace: false
+        web-allow-others: true
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        type: trace
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:user
+    username: root
+    password: 558525
+
+messages:
+  errorToGeneratePasswordEncrypted: There was a error while trying to encrypt password
+  genericError: Error
+  userAlreadyRegistered: Usuário já cadastrado!

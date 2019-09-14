@@ -1,0 +1,27 @@
+{
+  "groups": [
+    {
+      "name": "messages",
+      "type": "br.com.api.controller.model.MessageModel",
+      "sourceType": "br.com.api.controller.model.MessageModel"
+    }
+  ],
+  "properties": [
+    {
+      "name": "messages.error-to-generate-password-encrypt",
+      "type": "java.lang.String",
+      "sourceType": "br.com.api.controller.model.MessageModel"
+    },
+    {
+      "name": "messages.generic-error",
+      "type": "java.lang.String",
+      "sourceType": "br.com.api.controller.model.MessageModel"
+    },
+    {
+      "name": "messages.user-already-registered",
+      "type": "java.lang.String",
+      "sourceType": "br.com.api.controller.model.MessageModel"
+    }
+  ],
+  "hints": []
+}

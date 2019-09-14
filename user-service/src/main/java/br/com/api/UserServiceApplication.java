@@ -26,7 +26,7 @@ public class UserServiceApplication extends SpringBootServletInitializer {
     public ServletRegistrationBean<FacesServlet> servletRegistrationBean() {
         FacesServlet servlet = new FacesServlet();
         
-        return new ServletRegistrationBean<FacesServlet>(servlet, "*.jsf");
+        return new ServletRegistrationBean<>(servlet, "*.jsf");
     }
     
     @Bean

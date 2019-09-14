@@ -10,7 +10,7 @@ import javax.persistence.Id;
 
 import br.com.api.enums.PhoneTypeEnum;
 
-@Entity(name = "tbg_phone")
+@Entity(name = "tbg_telefone")
 public class PhoneEntity {
 
 	@Id
