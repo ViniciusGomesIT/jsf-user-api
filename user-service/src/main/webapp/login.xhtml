@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+      xmlns:p="http://primefaces.org/ui">
+      
+<ui:composition template="/templates/layout-login.xhtml">
+    <ui:define name="content">
+        <h:form id="loginForm">
+        	<p:messages id="messages" />
+            <p:panel header="Login">
+			    <p:panelGrid columns="2">
+			    
+			      <p:outputLabel for="userEmail" value="Email: " />
+			      <p:inputText id="userEmail" value="#{loginController.user.email}" required="true" 
+			      	requiredMessage="You must informe an email!" />
+			       
+			      <p:outputLabel for="userPassword" value="Password: " />
+			      <p:password id="userPassword" value="#{loginController.user.password}" required="true" 
+			      	requiredMessage="You must informe an password!" />
+			      	
+			      <p:commandButton value="Login" action="#{loginController.authenticateUser}" ajax="false" />
+			       
+			    </p:panelGrid>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>

@@ -22,9 +22,15 @@ spring:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:mem:user
     username: root
-    password: 558525
+    password: 542865
 
 messages:
-  errorToGeneratePasswordEncrypted: There was a error while trying to encrypt password
   genericError: Error
-  userAlreadyRegistered: Usuário já cadastrado!
+  genericInfo: Info
+  errorToGeneratePasswordEncrypted: There was a error while trying to encrypt password
+  userAlreadyRegistered: User already registered!
+  phoneAlreadyRegistered: One or more Phones already registered!
+  wrongPasswordOrEmail: The given password or email does not match. 
+  emailNotValid: The given email is not valid.
+  emailDoesNotMatch: The emails are not the same.
+  passwordDoesNotMatch: The passwords are not the same.

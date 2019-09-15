@@ -5,10 +5,10 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import br.com.api.entity.UserEntity;
+import br.com.api.entity.PhoneEntity;
 
 @Repository
-public interface UserRepository extends JpaRepository<UserEntity, Long> {
+public interface PhoneRepository extends JpaRepository<PhoneEntity, Long> {
 
-	Optional<UserEntity> findByEmailIgnoreCase(String email);
+	Optional<PhoneEntity> findByDddAndNumber(Integer ddd, String number);
 }

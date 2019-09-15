@@ -6,7 +6,7 @@ import java.security.NoSuchAlgorithmException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import br.com.api.controller.model.MessageModel;
+import br.com.api.model.MessageModel;
 
 public class GenerateMD5 {
 	private static final Logger log = LoggerFactory.getLogger(GenerateMD5.class);
@@ -29,7 +29,7 @@ public class GenerateMD5 {
             generatedPassword = sb.toString();
             
         } catch (NoSuchAlgorithmException e) {
-        	log.error(message.getErrorToGeneratePasswordEncrypt());
+        	log.error(message.getErrorToGeneratePasswordEncrypted());
         	log.error(e.toString());
         }
         

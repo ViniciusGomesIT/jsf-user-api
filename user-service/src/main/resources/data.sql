@@ -1,6 +1,6 @@
-insert into tbg_usuario (nome, email, senha) values ('VINCIUS', 'VINIGOMES47@GMAIL.COM', '123456');
-insert into tbg_usuario (nome, email, senha) values ('OTHER USER', 'OTHER_USER@BOL.COM.BR', '44567890');
-insert into tbg_usuario (nome, email, senha) values ('USER', 'USER_USER@OUTLOOK.COM.BR', '2326gataaDSads');
+insert into tbg_usuario (nome, email, senha) values ('VINCIUS GOMES DA SILVA SOUZA AGUIAR', 'VINIGOMES47@GMAIL.COM', 'e10adc3949ba59abbe56e057f20f883e');
+insert into tbg_usuario (nome, email, senha) values ('OTHER USER', 'OTHER_USER@BOL.COM.BR', 'e10adc3949ba59abbe56e057f20f883e');
+insert into tbg_usuario (nome, email, senha) values ('USER', 'USER_USER@OUTLOOK.COM.BR', 'e10adc3949ba59abbe56e057f20f883e');
 
 insert into tbg_telefone (ddd, numero, tipo) values (81, '995558813', 'P'); 
 insert into tbg_telefone (ddd, numero, tipo) values (81, '999009987', 'P'); 

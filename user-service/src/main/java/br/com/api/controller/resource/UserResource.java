@@ -10,4 +10,5 @@ public interface UserResource {
 	
 	List<UserEntity> findAllUsers();
 	
+	void deleteUser(Long id);
 }

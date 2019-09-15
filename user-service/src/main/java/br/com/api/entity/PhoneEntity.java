@@ -2,13 +2,9 @@ package br.com.api.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import br.com.api.enums.PhoneTypeEnum;
 
 @Entity(name = "tbg_telefone")
 public class PhoneEntity {
@@ -24,9 +20,8 @@ public class PhoneEntity {
 	@Column(name = "numero", nullable = false, unique = true)
 	private String number;
 
-	@Enumerated(EnumType.STRING)
 	@Column(name = "tipo", nullable = false)
-	private PhoneTypeEnum type;
+	private String type;
 
 	public Long getId() {
 		return id;
@@ -52,11 +47,11 @@ public class PhoneEntity {
 		this.number = number;
 	}
 
-	public PhoneTypeEnum getType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setType(PhoneTypeEnum type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 

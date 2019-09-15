@@ -1,79 +1,79 @@
 package br.com.api.controller.impl;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
-import org.ocpsoft.rewrite.annotation.Join;
-import org.ocpsoft.rewrite.el.ELBeanName;
-import org.springframework.context.annotation.Scope;
+import org.ocpsoft.rewrite.annotation.RequestAction;
+import org.ocpsoft.rewrite.faces.annotation.Deferred;
+import org.ocpsoft.rewrite.faces.annotation.IgnorePostback;
 import org.springframework.stereotype.Component;
 
-import br.com.api.controller.model.MessageModel;
 import br.com.api.controller.resource.UserResource;
-import br.com.api.entity.PhoneEntity;
 import br.com.api.entity.UserEntity;
-import br.com.api.enums.PhoneTypeEnum;
-import br.com.api.repository.UserRepository;
-import br.com.api.utils.security.GenerateMD5;
+import br.com.api.request.SaveUserRequest;
+import br.com.api.response.UserListResponse;
+import br.com.api.response.UserResponse;
+import br.com.api.services.UserService;
 
-@Scope(value = "session")
+@ViewScoped
 @Component(value = "userController")
-@ELBeanName(value = "userController")
-@Join(path = "/user", to = "/user-form.jsf")
 public class UserController implements UserResource {
 
-	private UserRepository userRepository;
-	private MessageModel message;
+	private UserService service;
 	
+	private SaveUserRequest saveUserRequest;
 	private UserEntity user;
-	
-	FacesContext context;
-	
+	private UserResponse response;
+
 	@Inject
-	public UserController(UserRepository userRepository, MessageModel message) {
-		this.userRepository = userRepository;
-		this.message = message;
+	public UserController(UserService service) {
+		this.service = service;
+		this.saveUserRequest = new SaveUserRequest();
 		this.user = new UserEntity();
-		this.context = FacesContext.getCurrentInstance();
 	}
 
 	@Override
 	public String save() {
-		Optional<UserEntity> userOpt = userRepository.findByEmailIgnoreCase(user.getEmail());
+		response = this.service.saveUser(user, saveUserRequest);
 		
-		if ( userOpt.isPresent() ) {
-			FacesContext.getCurrentInstance()
-				.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message.getUserAlreadyRegistered(), message.getGenericError()));
-			
-			return null;
+		if ( response.getUser().isPresent() ) {
+			return "/list.xhtml?faces-redirect=true";
 		}
 		
-		user.setPassword(GenerateMD5.generate(user.getPassword()));
+		FacesContext.getCurrentInstance().addMessage("UserController", new FacesMessage(response.getMessage()));
 		
-		PhoneEntity phone = new PhoneEntity();
-		phone.setDdd(81);
-		phone.setNumber("12345678");
-		phone.setType(PhoneTypeEnum.PESSOAL);
+		return "/register";
+	}
+	
+	@Override
+	@Deferred
+    @RequestAction
+    @IgnorePostback
+	public List<UserEntity> findAllUsers() {
+		UserListResponse response = service.findAllUsers();
 		
-		user.setPhones(Arrays.asList(phone));
-		
-		userRepository.save(user);
-		
-		return "/product-list.xhtml?faces-redirect=true";
+		return response.getUserList();
+	}
+	
+	@Override
+	public void deleteUser(Long id) {
+		service.deleteById(id);
+	}
+	
+	public SaveUserRequest getSaveUserRequest() {
+		return saveUserRequest;
 	}
 
 	public UserEntity getUser() {
 		return user;
 	}
 
-	@Override
-	public List<UserEntity> findAllUsers() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	public UserResponse getResponse() {
+//		return response;
+//	}
+
 }
