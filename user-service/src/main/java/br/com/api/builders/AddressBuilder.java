@@ -1,10 +1,7 @@
 package br.com.api.builders;
 
 import br.com.api.entity.AddressEntity;
-import br.com.api.entity.CityEntity;
-import br.com.api.entity.CountryEntity;
-import br.com.api.entity.NeighborhoodEntity;
-import br.com.api.entity.StateEntity;
+
 
 public class AddressBuilder {
 
@@ -14,7 +11,6 @@ public class AddressBuilder {
 	private String neighborhoodName;
 	private String cityName;
 	private String stateName;
-	private String countryName;
 
 	public AddressBuilder withAddressName(String addressName) {
 		this.addressName = addressName;
@@ -47,33 +43,15 @@ public class AddressBuilder {
 		return this;
 	}
 	
-	public AddressBuilder withCountry(String countryName) {
-		this.countryName = countryName;	
-		return this;
-	}
-	
 	public AddressEntity build() {
+		
 		AddressEntity address = new AddressEntity();
-		address.setAddress(addressName);
+		address.setAddressName(addressName);
 		address.setAddressComplement(addressComplement);
 		address.setPostalCode(addressPostalCode);
-		
-		CountryEntity country = new CountryEntity();
-		country.setName(countryName);
-		
-		StateEntity state = new StateEntity();
-		state.setName(stateName);
-		state.setCountry(country);
-		
-		CityEntity city = new CityEntity();
-		city.setName(cityName);
-		city.setState(state);
-		
-		NeighborhoodEntity neighborhood = new NeighborhoodEntity();
-		neighborhood.setName(neighborhoodName);
-		neighborhood.setCity(city);
-		
-		address.setNeighborhood(neighborhood);
+		address.setNeighborhoodName(neighborhoodName);
+		address.setCityName(cityName);
+		address.setStateName(stateName);
 		
 		return address;
 	}

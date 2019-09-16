@@ -15,7 +15,9 @@ public class MessageModel {
 	private String wrongPasswordOrEmail;
 	private String emailNotValid;
 	private String emailDoesNotMatch;
-	private String passwordDoesNotMatch;
+	private String userNotFound;
+	private String oldPasswordDoesNotMatch;
+	private String passwordChangedSucess;
 
 	public String getGenericError() {
 		return genericError;
@@ -81,11 +83,28 @@ public class MessageModel {
 		this.emailDoesNotMatch = emailDoesNotMatch;
 	}
 
-	public String getPasswordDoesNotMatch() {
-		return passwordDoesNotMatch;
+	public String getUserNotFound() {
+		return userNotFound;
 	}
 
-	public void setPasswordDoesNotMatch(String passwordDoesNotMatch) {
-		this.passwordDoesNotMatch = passwordDoesNotMatch;
+	public void setUserNotFound(String userNotFound) {
+		this.userNotFound = userNotFound;
 	}
+
+	public String getOldPasswordDoesNotMatch() {
+		return oldPasswordDoesNotMatch;
+	}
+
+	public void setOldPasswordDoesNotMatch(String oldPasswordDoesNotMatch) {
+		this.oldPasswordDoesNotMatch = oldPasswordDoesNotMatch;
+	}
+
+	public String getPasswordChangedSucess() {
+		return passwordChangedSucess;
+	}
+
+	public void setPasswordChangedSucess(String passwordChangedSucess) {
+		this.passwordChangedSucess = passwordChangedSucess;
+	}
+
 }

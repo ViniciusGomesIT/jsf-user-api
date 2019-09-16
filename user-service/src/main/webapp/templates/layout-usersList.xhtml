@@ -16,7 +16,8 @@
             <div class="ui-g-12">
                 <p:toolbar>
                     <f:facet name="left">
-                        <p:button href="/register.jsf" value="New User" />
+                        <p:button href="/pages/register.jsf" value="New User" />
+                        <p:commandButton action="#{loginController.logout()}" value="Logout"/>
                     </f:facet>
                 </p:toolbar>
             </div>

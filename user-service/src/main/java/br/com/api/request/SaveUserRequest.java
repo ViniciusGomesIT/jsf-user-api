@@ -1,16 +1,27 @@
 package br.com.api.request;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import br.com.api.entity.PhoneEntity;
 
-public class SaveUserRequest {
+public class SaveUserRequest extends GenericRequest {
 
-	private String passwordConfirm;
+	private Long id;
+
+	private String name;
+
+	private String email;
 	private String emailConfirm;
-	
-	private List<PhoneEntity> phoneList;
+
+	private String password;
+	private String passwordConfirm;
+
+	private Date dateOfBirth;
+	private Date registrationDate;
+	private String gender;
+	private String maritalStatus;
 
 	private Integer phone1DDD;
 	private String phone1Number;
@@ -28,12 +39,30 @@ public class SaveUserRequest {
 	private String stateName;
 	private String countryName;
 
-	public String getPasswordConfirm() {
-		return passwordConfirm;
+	private List<PhoneEntity> phones;
+
+	public Long getId() {
+		return id;
 	}
 
-	public void setPasswordConfirm(String passwordConfirm) {
-		this.passwordConfirm = passwordConfirm;
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getEmailConfirm() {
@@ -43,17 +72,53 @@ public class SaveUserRequest {
 	public void setEmailConfirm(String emailConfirm) {
 		this.emailConfirm = emailConfirm;
 	}
-	
-	public List<PhoneEntity> getPhoneList() {
-		if ( null == this.phoneList ) {
-			this.phoneList = new ArrayList<>();
-		}
-		
-		return phoneList;
+
+	public String getPassword() {
+		return password;
 	}
 
-	public void setPhoneList(List<PhoneEntity> phoneList) {
-		this.phoneList = phoneList;
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getPasswordConfirm() {
+		return passwordConfirm;
+	}
+
+	public void setPasswordConfirm(String passwordConfirm) {
+		this.passwordConfirm = passwordConfirm;
+	}
+
+	public Date getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+
+	public Date getRegistrationDate() {
+		return registrationDate;
+	}
+
+	public void setRegistrationDate(Date registrationDate) {
+		this.registrationDate = registrationDate;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getMaritalStatus() {
+		return maritalStatus;
+	}
+
+	public void setMaritalStatus(String maritalStatus) {
+		this.maritalStatus = maritalStatus;
 	}
 
 	public Integer getPhone1DDD() {
@@ -158,6 +223,18 @@ public class SaveUserRequest {
 
 	public void setCountryName(String countryName) {
 		this.countryName = countryName;
+	}
+
+	public List<PhoneEntity> getPhones() {
+		if (null == this.phones) {
+			this.phones = new ArrayList<>();
+		}
+
+		return phones;
+	}
+
+	public void setPhones(List<PhoneEntity> phones) {
+		this.phones = phones;
 	}
 
 }

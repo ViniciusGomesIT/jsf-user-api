@@ -33,4 +33,6 @@ messages:
   wrongPasswordOrEmail: The given password or email does not match. 
   emailNotValid: The given email is not valid.
   emailDoesNotMatch: The emails are not the same.
-  passwordDoesNotMatch: The passwords are not the same.
+  userNotFound: User with the given id was no found.
+  oldPasswordDoesNotMatch: The given old password does not match.
+  passwordChangedSucess: Password was changed!

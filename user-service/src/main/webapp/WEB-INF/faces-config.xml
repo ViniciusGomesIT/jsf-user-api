@@ -7,8 +7,16 @@
     <application>
         <el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
     </application>
-    <validator>
-	    <validator-id>EmailValidator</validator-id>
-	    <validator-class>br.com.api.utils.validators.EmailValidator</validator-class>
-   	</validator>
+    <lifecycle>
+	   <phase-listener>br.com.api.filter.LoggedInCheck</phase-listener>
+	</lifecycle>
+	<navigation-rule>
+       <from-view-id>/*</from-view-id>
+       <navigation-case>
+             <from-outcome>logout</from-outcome>
+             <to-view-id>/pages/login.jsf</to-view-id>
+             <redirect/>
+       </navigation-case>
+	</navigation-rule>
+	
 </faces-config>

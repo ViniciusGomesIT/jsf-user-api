@@ -38,7 +38,7 @@ public class LoginServiceImpl implements LoginService {
 		}
 		
 		response.setUser(Optional.empty());
-		response.setMessage(message.getWrongPasswordOrEmail());
+		response.setErrorMessage(message.getWrongPasswordOrEmail());
 
 		return response;
 	}

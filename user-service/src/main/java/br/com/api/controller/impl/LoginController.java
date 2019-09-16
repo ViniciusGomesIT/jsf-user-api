@@ -1,11 +1,12 @@
 package br.com.api.controller.impl;
 
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.SessionScope;
 
 import br.com.api.controller.resource.LoginResource;
 import br.com.api.entity.UserEntity;
@@ -13,7 +14,7 @@ import br.com.api.model.MessageModel;
 import br.com.api.response.UserResponse;
 import br.com.api.services.LoginService;
 
-@ViewScoped
+@SessionScope
 @Component (value = "loginController")
 public class LoginController implements LoginResource {
 	
@@ -32,12 +33,21 @@ public class LoginController implements LoginResource {
 		UserResponse userResponse = loginService.authenticateUser(user);
 		
 		if ( userResponse.getUser().isPresent() ) {
-			return "/list.xhtml?faces-redirect=true";
+			HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+			session.setAttribute("userLogged", userResponse.getUser().get());
+			
+			return "/pages/list.xhtml?faces-redirect=true";
 		}
 		
-		FacesContext.getCurrentInstance().addMessage("LoginController", new FacesMessage(userResponse.getMessage()));
+		FacesContext.getCurrentInstance().addMessage("LoginController", new FacesMessage(userResponse.getMessageError()));
 		
-		return "/login-form.xhtml";
+		return "/pages/login.xhtml?faces-redirect=true";
+	}
+	
+	public String logout() {
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		
+		return "/pages/login.xhtml?faces-redirect=true";
 	}
 	
 	public UserEntity getUser() {

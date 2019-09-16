@@ -11,67 +11,77 @@
         <h:form id="userListForm">
         	<p:messages id="messages" />
             <p:panel header="User List">
-                <p:dataTable id="userTable" var="user" value="#{userController.findAllUsers()}">
-                    <p:column width="25">
+                <p:dataTable id="userTable" var="user" value="#{userController.findAllUsers()}" tableStyle="width:auto">
+                    <p:column style="text-align: center">
                         <f:facet name="header">Id</f:facet>
                         <h:outputText value="#{user.id}" />
                     </p:column>
 
-                    <p:column>
+                    <p:column style="text-align: center">
                         <f:facet name="header">Name</f:facet>
                         <h:outputText value="#{user.name}" />
                     </p:column>
                     
-                    <p:column>
+                    <p:column style="text-align: center">
                         <f:facet name="header">Email</f:facet>
                         <h:outputText id="email" value="#{user.email}" />
                     </p:column>
                     
-                    <p:column>
+                    <p:column style="text-align: center">
                         <f:facet name="header">Password</f:facet>
                         <h:outputText id="password" value="#{user.password}" />
                     </p:column>
                     
-                    <p:column width="100">
+                    <p:column style="text-align: center">
                         <f:facet name="header">Registration Date</f:facet>
                         <h:outputText id="registrationDate" value="#{user.registrationDate}">
                         	<f:convertDateTime pattern="dd/MM/yyyy"/>
                         </h:outputText>
                     </p:column>
                     
-                    <p:column width="20">
+                    <p:column style="text-align: center">
                         <f:facet name="header">Gender</f:facet>
                         <h:outputText id="gender" value="#{user.gender}" />
                     </p:column>
                     
-                    <p:column width="45">
+                    <p:column style="text-align: center">
                         <f:facet name="header">Marital Status</f:facet>
                         <h:outputText id="maritalStatus" value="#{user.maritalStatus}" />
                     </p:column>
                     
-                    <p:column width="100">
+                    <p:column style="text-align: center">
                         <f:facet name="header">Birthday</f:facet>
-                        <h:outputText id="dateOfBirth" value="#{user.dateOfBirth}" />
+                        <h:outputText id="dateOfBirth" value="#{user.dateOfBirth}">
+                        	<f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
                     </p:column>
                     
-                    <p:column>
+                    <p:column style="text-align: center">
                         <f:facet name="header">Address</f:facet>
-                        <h:outputText id="address" value="#{user.address}" />
+                        <h:outputText id="address" value="#{user.address.addressName} #{user.address.addressComplement} - #{user.address.postalCode},  
+                        	#{user.address.neighborhoodName}, #{user.address.cityName}, #{user.address.stateName}" />
                     </p:column>
                     
-                    <p:column width="150">
-                        <f:facet name="header">Phones</f:facet>
-                        <h:outputText id="phones" value="#{phone.ddd.concat(phone.number)}" />
+                    <p:column style="text-align: center">
+                    	<f:facet name="header">Phones</f:facet>
+                    	<p:repeat var="phone" value="#{user.phones}">
+                        	<h:outputText id="phones" value="#{phone.ddd}#{phone.number}(#{phone.type})&lt;br/&gt;" escape="false"/>
+                    	</p:repeat>
                     </p:column>
                     
-                    <p:column width="45">
+                    <p:column style="text-align: center">
                         <f:facet name="header">Delete</f:facet>
                         <p:commandButton icon="ui-icon-circle-close" action="#{userController.deleteUser(user.id)}" update=":userListForm:userTable"/>
                     </p:column>
                     
-                     <p:column width="40">
+                     <p:column style="text-align: center">
                         <f:facet name="header">Edit</f:facet>
                          <p:commandButton icon="ui-icon-pencil" action="#{userController.editUser(user.id)}" />
+                    </p:column>
+                    
+                    <p:column style="text-align: center">
+                        <f:facet name="header">Edit Password</f:facet>
+                         <p:commandButton icon="ui-icon-pencil" action="#{userController.editPassword(user.id)}" />
                     </p:column>
                     
                 </p:dataTable>

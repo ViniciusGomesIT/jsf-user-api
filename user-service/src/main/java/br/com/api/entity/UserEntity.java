@@ -1,5 +1,6 @@
 package br.com.api.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -20,7 +21,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity(name = "tbg_usuario")
-public class UserEntity {
+public class UserEntity implements Serializable {
+
+	private static final long serialVersionUID = -4464136064095930496L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,7 +56,7 @@ public class UserEntity {
 	@JoinColumn(name = "endereco_id")
 	private AddressEntity address;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "tbg_usuario_telefones", 
 		joinColumns = @JoinColumn(name = "usuario_id"), 
 		inverseJoinColumns = @JoinColumn(name = "telefone_id"))

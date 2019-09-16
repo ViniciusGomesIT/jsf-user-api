@@ -2,27 +2,49 @@ package br.com.api.response;
 
 public class GenericResponse {
 
-	private StringBuilder messageBuilder;
+	private StringBuilder messageErrorBuilder;
+	private StringBuilder messages;
 	private static final String EMPTY_STRING = new String();
 
-	public String getMessage() {
-		if ( null == messageBuilder ) {
+	public String getMessageError() {
+		if ( null == messageErrorBuilder ) {
 			return EMPTY_STRING;
 		}
 		
-		return messageBuilder.toString();
+		return messageErrorBuilder.toString();
 	}
 
-	public void setMessage(String message) {
-		if ( null == messageBuilder ) {
-			messageBuilder = new StringBuilder();
+	public void setErrorMessage(String message) {
+		if ( null == messageErrorBuilder ) {
+			messageErrorBuilder = new StringBuilder();
 		}
 		
-		if ( messageBuilder.length() == 0 ) {
-			messageBuilder.append(message);
+		if ( messageErrorBuilder.length() == 0 ) {
+			messageErrorBuilder.append(message);
 		} else {
-			messageBuilder.append("\n");
-			messageBuilder.append(message);
+			messageErrorBuilder.append("\n");
+			messageErrorBuilder.append(message);
+		}
+	}
+	
+	public String getMessages() {
+		if ( null == messages ) {
+			return EMPTY_STRING;
+		}
+		
+		return messages.toString();
+	}
+	
+	public void setMessage(String message) {
+		if ( null == messages ) {
+			messages = new StringBuilder();
+		}
+		
+		if ( messages.length() == 0 ) {
+			messages.append(message);
+		} else {
+			messages.append("\n");
+			messages.append(message);
 		}
 	}
 }
