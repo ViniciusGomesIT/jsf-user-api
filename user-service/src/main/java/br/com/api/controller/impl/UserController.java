@@ -10,14 +10,14 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
-import br.com.api.controller.resource.UserResource;
+import br.com.api.controller.interfaces.UserResource;
 import br.com.api.entity.PhoneEntity;
 import br.com.api.entity.UserEntity;
 import br.com.api.request.ResetPasswordRequest;
 import br.com.api.request.SaveUserRequest;
 import br.com.api.response.UserListResponse;
 import br.com.api.response.UserResponse;
-import br.com.api.services.UserService;
+import br.com.api.services.interfaces.UserService;
 
 @SessionScope
 @Component(value = "userController")

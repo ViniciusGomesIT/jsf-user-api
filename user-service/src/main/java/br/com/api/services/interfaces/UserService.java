@@ -1,4 +1,4 @@
-package br.com.api.services;
+package br.com.api.services.interfaces;
 
 import br.com.api.request.ResetPasswordRequest;
 import br.com.api.request.SaveUserRequest;

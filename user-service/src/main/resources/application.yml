@@ -23,7 +23,29 @@ spring:
     url: jdbc:h2:mem:user
     username: root
     password: 542865
-
+  mail:
+    starttls-enable: true
+    starttls-required: true
+    username: emailsender258@gmail.com    password: Pkp25j67*Lmnk
+    port: 587
+    host: smtp.gmail.com
+    connection-timeout: 1000
+    ssl-enable: false
+    emailSender: emailsender258@gmail.com
+#    properties:
+      
+#    test-connection: true 
+#    
+#    protocol: smtp
+#    auth: true
+#    sslEnable: false
+#    starttlsEnable: true
+#    starttlsRequired: true
+    
+            
+security:
+  key: de040b801e9df29ca714ab7f3d97db8c
+  
 messages:
   genericError: Error
   genericInfo: Info
@@ -33,6 +55,10 @@ messages:
   wrongPasswordOrEmail: The given password or email does not match. 
   emailNotValid: The given email is not valid.
   emailDoesNotMatch: The emails are not the same.
-  userNotFound: User with the given id was no found.
+  userNotFound: User not found.
   oldPasswordDoesNotMatch: The given old password does not match.
   passwordChangedSucess: Password was changed!
+  emailSendSucess: The reminder of password was send to email %s
+  emailSendError: There was a error while trying to send a email with cause %s
+  emailReminderPasswordMessage: Here are your reminder password %s
+  resetPasswordEmailSubject: Reminder Password

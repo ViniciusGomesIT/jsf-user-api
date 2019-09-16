@@ -25,10 +25,14 @@ public class LoginFilter implements PhaseListener {
         FacesContext facesContext = event.getFacesContext();
         
         boolean loginPage = facesContext.getViewRoot().getViewId().lastIndexOf("login") > -1 ? true : false;
+        boolean isReminderPasswordPage = facesContext.getViewRoot().getViewId().lastIndexOf("reminder-password") > -1 ? true : false;
+        boolean isRegisterPage = facesContext.getViewRoot().getViewId().lastIndexOf("register") > -1 ? true : false;
         
         if ( !loginPage && !isLoggedIn() ) {
-            NavigationHandler navigationHandler = facesContext.getApplication().getNavigationHandler();
-            navigationHandler.handleNavigation(facesContext, null, "logout");
+        	if ( !isReminderPasswordPage && !isRegisterPage) {
+        		NavigationHandler navigationHandler = facesContext.getApplication().getNavigationHandler();
+        		navigationHandler.handleNavigation(facesContext, null, "logout");
+        	}
         }
     }
 

@@ -10,11 +10,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
-import br.com.api.controller.resource.LoginResource;
+import br.com.api.controller.interfaces.LoginResource;
 import br.com.api.entity.UserEntity;
 import br.com.api.model.MessageModel;
 import br.com.api.response.UserResponse;
-import br.com.api.services.LoginService;
+import br.com.api.services.interfaces.LoginService;
 
 @SessionScope
 @Component (value = "loginController")

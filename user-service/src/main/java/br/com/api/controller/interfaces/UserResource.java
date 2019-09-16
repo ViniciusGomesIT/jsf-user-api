@@ -1,4 +1,4 @@
-package br.com.api.controller.resource;
+package br.com.api.controller.interfaces;
 
 import java.util.List;
 

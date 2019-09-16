@@ -24,7 +24,7 @@ import br.com.api.request.SaveUserRequest;
 import br.com.api.response.UserListResponse;
 import br.com.api.response.UserResponse;
 import br.com.api.security.utils.GenerateMD5;
-import br.com.api.services.UserService;
+import br.com.api.services.interfaces.UserService;
 
 @Service
 public class UserServiceImpl implements UserService, Serializable {

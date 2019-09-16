@@ -12,7 +12,7 @@ import br.com.api.model.MessageModel;
 import br.com.api.repository.UserRepository;
 import br.com.api.response.UserResponse;
 import br.com.api.security.utils.GenerateMD5;
-import br.com.api.services.LoginService;
+import br.com.api.services.interfaces.LoginService;
 
 @Service
 public class LoginServiceImpl implements LoginService, Serializable {

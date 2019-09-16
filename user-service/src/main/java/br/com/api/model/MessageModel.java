@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 public class MessageModel implements Serializable {
 
 	private static final long serialVersionUID = -7067557703562007762L;
-	
+
 	private String genericError;
 	private String genericInfo;
 	private String errorToGeneratePasswordEncrypted;
@@ -22,6 +22,10 @@ public class MessageModel implements Serializable {
 	private String userNotFound;
 	private String oldPasswordDoesNotMatch;
 	private String passwordChangedSucess;
+	private String emailSendSucess;
+	private String emailSendError;
+	private String emailReminderPasswordMessage;
+	private String resetPasswordEmailSubject;
 
 	public String getGenericError() {
 		return genericError;
@@ -109,6 +113,38 @@ public class MessageModel implements Serializable {
 
 	public void setPasswordChangedSucess(String passwordChangedSucess) {
 		this.passwordChangedSucess = passwordChangedSucess;
+	}
+
+	public String getEmailSendSucess() {
+		return emailSendSucess;
+	}
+
+	public void setEmailSendSucess(String emailSendSucess) {
+		this.emailSendSucess = emailSendSucess;
+	}
+
+	public String getEmailSendError() {
+		return emailSendError;
+	}
+
+	public void setEmailSendError(String emailSendError) {
+		this.emailSendError = emailSendError;
+	}
+
+	public String getEmailReminderPasswordMessage() {
+		return emailReminderPasswordMessage;
+	}
+
+	public void setEmailReminderPasswordMessage(String emailReminderPasswordMessage) {
+		this.emailReminderPasswordMessage = emailReminderPasswordMessage;
+	}
+
+	public String getResetPasswordEmailSubject() {
+		return resetPasswordEmailSubject;
+	}
+
+	public void setResetPasswordEmailSubject(String resetPasswordEmailSubject) {
+		this.resetPasswordEmailSubject = resetPasswordEmailSubject;
 	}
 
 }

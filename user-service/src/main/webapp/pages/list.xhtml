@@ -11,7 +11,7 @@
         <h:form id="userListForm">
         	<p:messages id="messages" />
             <p:panel header="User List">
-                <p:dataTable id="userTable" var="user" value="#{userController.findAllUsers()}" tableStyle="width:auto">
+                <p:dataTable id="userTable" var="user" value="#{userController.findAllUsers()}" tableStyle="width:auto" paginator="true" rows="15">
                     <p:column style="text-align: center">
                         <f:facet name="header">Id</f:facet>
                         <h:outputText value="#{user.id}" />
