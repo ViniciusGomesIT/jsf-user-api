@@ -1,5 +1,6 @@
 package br.com.api.services.impl;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -22,11 +23,13 @@ import br.com.api.request.ResetPasswordRequest;
 import br.com.api.request.SaveUserRequest;
 import br.com.api.response.UserListResponse;
 import br.com.api.response.UserResponse;
+import br.com.api.security.utils.GenerateMD5;
 import br.com.api.services.UserService;
-import br.com.api.utils.security.GenerateMD5;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, Serializable {
+	
+	private static final long serialVersionUID = -6733962411945021876L;
 	
 	private UserRepository userRepository;
 	private PhoneRepository phoneRepository;
@@ -54,7 +57,10 @@ public class UserServiceImpl implements UserService {
 		user = buildUserEntity(saveUserRequest);
 		
 		user.setPassword(GenerateMD5.generate(saveUserRequest.getPassword()));
-		user.setRegistrationDate(new Date());
+		
+		if ( user.getRegistrationDate() != null) {
+			user.setRegistrationDate(new Date());
+		}
 		
 		if ( userResponse.getMessageError().isEmpty() ) {
 			userResponse.setUser( userRepository.save(user) );
@@ -123,6 +129,7 @@ public class UserServiceImpl implements UserService {
 		AddressEntity address = buidAddressEntity(saveUserRequest);
 				
 		return new UserEntityBuilder()
+				.withId(saveUserRequest.getId())
 				.withName(saveUserRequest.getName())
 				.withEmail(saveUserRequest.getEmail())
 				.withPassword(saveUserRequest.getPassword())

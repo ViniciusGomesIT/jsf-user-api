@@ -65,6 +65,8 @@ public class UserController implements UserResource, Serializable {
 	@Override
 	public String editUser(Long id) {
 		this.saveUserRequest = service.editUser(id);
+		this.saveUserRequest.setRenderPassword(false);
+		this.saveUserRequest.setRenderReset(false);
 		
 		if ( saveUserRequest.getMessage().isEmpty() ) {
 			return "/pages/register.xhtml?faces-redirect=true";

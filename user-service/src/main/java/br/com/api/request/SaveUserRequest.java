@@ -1,12 +1,15 @@
 package br.com.api.request;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import br.com.api.entity.PhoneEntity;
 
-public class SaveUserRequest extends GenericRequest {
+public class SaveUserRequest extends GenericRequest implements Serializable {
+
+	private static final long serialVersionUID = 998384118088456493L;
 
 	private Long id;
 
@@ -17,6 +20,9 @@ public class SaveUserRequest extends GenericRequest {
 
 	private String password;
 	private String passwordConfirm;
+
+	private boolean renderPassword;
+	private boolean renderReset;
 
 	private Date dateOfBirth;
 	private Date registrationDate;
@@ -40,6 +46,11 @@ public class SaveUserRequest extends GenericRequest {
 	private String countryName;
 
 	private List<PhoneEntity> phones;
+
+	public SaveUserRequest() {
+		renderPassword = true;
+		renderReset = true;
+	}
 
 	public Long getId() {
 		return id;
@@ -87,6 +98,22 @@ public class SaveUserRequest extends GenericRequest {
 
 	public void setPasswordConfirm(String passwordConfirm) {
 		this.passwordConfirm = passwordConfirm;
+	}
+
+	public boolean isRenderPassword() {
+		return renderPassword;
+	}
+
+	public void setRenderPassword(boolean renderPassword) {
+		this.renderPassword = renderPassword;
+	}
+
+	public boolean isRenderReset() {
+		return renderReset;
+	}
+
+	public void setRenderReset(boolean renderReset) {
+		this.renderReset = renderReset;
 	}
 
 	public Date getDateOfBirth() {

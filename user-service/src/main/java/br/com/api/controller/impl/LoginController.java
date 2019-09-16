@@ -1,5 +1,7 @@
 package br.com.api.controller.impl;
 
+import java.io.Serializable;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -16,8 +18,10 @@ import br.com.api.services.LoginService;
 
 @SessionScope
 @Component (value = "loginController")
-public class LoginController implements LoginResource {
+public class LoginController implements LoginResource, Serializable {
 	
+	private static final long serialVersionUID = -9106948530846950619L;
+
 	private LoginService loginService;
 	
 	private UserEntity user;

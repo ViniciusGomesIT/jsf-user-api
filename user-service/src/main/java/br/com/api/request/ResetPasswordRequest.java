@@ -1,7 +1,11 @@
 package br.com.api.request;
 
-public class ResetPasswordRequest extends GenericRequest{
+import java.io.Serializable;
 
+public class ResetPasswordRequest extends GenericRequest implements Serializable {
+
+	private static final long serialVersionUID = -7735217741550561387L;
+	
 	private Long id;
 	private String oldPassword;
 	private String newPassword;

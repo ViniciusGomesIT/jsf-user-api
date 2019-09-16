@@ -9,6 +9,7 @@ import br.com.api.entity.UserEntity;
 
 public class UserEntityBuilder {
 	
+	private Long id;
 	private String name;
 	private String email;
 	private String password;
@@ -19,6 +20,15 @@ public class UserEntityBuilder {
 	private AddressEntity address;
 	private List<PhoneEntity> phones;
 	
+	public Long getId() {
+		return id;
+	}
+
+	public UserEntityBuilder withId(Long id) {
+		this.id = id;
+		return this;
+	}
+
 	public UserEntityBuilder withName(String name) {
 		this.name = name;
 		return this;

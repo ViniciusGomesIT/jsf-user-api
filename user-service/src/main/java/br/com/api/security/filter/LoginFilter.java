@@ -1,4 +1,4 @@
-package br.com.api.filter;
+package br.com.api.security.filter;
 
 import javax.faces.application.NavigationHandler;
 import javax.faces.context.FacesContext;
@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import br.com.api.entity.UserEntity;
 
-public class LoggedInCheck implements PhaseListener {
+public class LoginFilter implements PhaseListener {
 
 	private static final long serialVersionUID = 8174314772879213074L;
 
@@ -22,20 +22,16 @@ public class LoggedInCheck implements PhaseListener {
     }
 
     public void afterPhase(PhaseEvent event) {
-        FacesContext fc = event.getFacesContext();
+        FacesContext facesContext = event.getFacesContext();
         
-        boolean loginPage = fc.getViewRoot().getViewId().lastIndexOf("login") > -1 ? true : false;
+        boolean loginPage = facesContext.getViewRoot().getViewId().lastIndexOf("login") > -1 ? true : false;
         
-        if ( !loginPage && !loggedIn() ) {
-            NavigationHandler nh = fc.getApplication().getNavigationHandler();
-            nh.handleNavigation(fc, null, "logout");
+        if ( !loginPage && !isLoggedIn() ) {
+            NavigationHandler navigationHandler = facesContext.getApplication().getNavigationHandler();
+            navigationHandler.handleNavigation(facesContext, null, "logout");
         }
     }
 
-    private boolean loggedIn() {
-        return isLoggedIn();
-    }
-    
     public static boolean isLoggedIn() {
         HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true);
         

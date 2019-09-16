@@ -21,9 +21,9 @@
                 	</h:panelGroup>
                 	<h:message for="name" />
                 	
-            		<h:panelGroup id="phonesGroup">
-             			<p:outputLabel value="Phones: " />
-             			<p:repeat var="phone" value="#{userController.saveUserRequest.phones}">
+           			<p:outputLabel value="Phones: "/>
+           			<h:panelGroup id="phonesGroup">
+           				<p:repeat var="phone" value="#{userController.saveUserRequest.phones}">
               				<p:outputLabel for="ddd" value="DDD: " /> 
                        		<p:inputText id="ddd" value="#{phone.ddd}" size="5" maxlength="5" />
                         	
@@ -38,9 +38,8 @@
 							   	<f:selectItem itemValue="B" 		itemLabel="Business" />
 							   	<f:selectItem itemValue="Other" 	itemLabel="Other" />
 							</h:selectOneMenu>
-	                   	</p:repeat>
+                   		</p:repeat>
 					</h:panelGroup>
-					<h:panelGroup></h:panelGroup>
                		<p:commandButton id="addPhone" icon="ui-icon-plus" value="add" action="#{userController.addPhone(phone)}" update="phonesGroup" process="@this" />
                 	
                		<h:message for="ddd" /> 
@@ -65,19 +64,21 @@
                 	</h:panelGroup>
                 	<h:message for="emailConfirm" />
                     
-                    <h:panelGroup>
+                    <h:panelGroup rendered="#{userController.saveUserRequest.renderPassword}">
 	                    <p:outputLabel for="password" value="Password: " />
 	                    <p:password id="password" value="#{userController.saveUserRequest.password}" required="true" match="passwordConfirm"
-	                    	requiredMessage="You need to inform an password!" validatorMessage="The passwords not match or is too short" maxlength="30" size="20" redisplay="false">
+	                    	requiredMessage="You need to inform an password!" validatorMessage="The passwords not match or is too short" maxlength="30" 
+	                    	size="20" redisplay="false" rendered="#{userController.saveUserRequest.renderPassword}">
 	                    	<f:validateLength minimum="6" maximum="30" />
 	                    </p:password>
                 	</h:panelGroup>
                 	<h:message for="password" />
                 	
-                	<h:panelGroup>
+                	<h:panelGroup rendered="#{userController.saveUserRequest.renderPassword}">
 	                    <p:outputLabel for="passwordConfirm" value="Password Confirm: " />
 	                    <p:password id="passwordConfirm" value="#{userController.saveUserRequest.passwordConfirm}" required="true" 
-	                    	requiredMessage="You need to confirm password!" validatorMessage="The given password is too short" maxlength="30" size="20" redisplay="false">
+	                    	requiredMessage="You need to confirm password!" validatorMessage="The given password is too short" maxlength="30" 
+	                    	size="20" redisplay="false" rendered="#{userController.saveUserRequest.renderPassword}">
 	                    	<f:validateLength minimum="6" maximum="30" />
 	                    </p:password>
                 	</h:panelGroup>
@@ -106,7 +107,7 @@
 	                	<p:outputLabel for="maritalStatus" value="Marital Status: " />
 				      	<h:selectOneMenu id="maritalStatus" value="#{userController.saveUserRequest.maritalStatus}" required="true" requiredMessage="You must select a option">
 				      		<f:selectItem itemValue="#{null}" 		itemLabel="Select" />
-                   			<f:selectItem itemValue="Not married" 	itemLabel="Not married" />
+                   			<f:selectItem itemValue="Not Married" 	itemLabel="Not Married" />
 						   	<f:selectItem itemValue="Married" 		itemLabel="Married" />
 						   	<f:selectItem itemValue="Divorced" 		itemLabel="Divorced" />
 						   	<f:selectItem itemValue="Other" 		itemLabel="Other" />
@@ -161,7 +162,11 @@
                    		</p:inputText>
                 	</h:panelGroup>                    	
                 	<h:message for="state" />
-                    <h:commandButton value="Save" action="#{userController.save}" />
+                	
+                	<h:panelGroup>
+	                    <h:commandButton value="Save" action="#{userController.save}" />
+	                    <h:commandButton value="Reset" type="reset" rendered="#{userController.saveUserRequest.renderReset}"/>
+                	</h:panelGroup>
                 </h:panelGrid>
             </p:panel>
         </h:form>

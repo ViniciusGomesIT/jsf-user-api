@@ -1,4 +1,4 @@
-package br.com.api.utils.security;
+package br.com.api.security.utils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

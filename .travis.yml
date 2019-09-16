@@ -1,0 +1,10 @@
+language: java
+dist: trusty
+notifications:
+  email: never
+jdk:
+- oraclejdk8
+install:
+- mvn install
+script:
+- mvn test

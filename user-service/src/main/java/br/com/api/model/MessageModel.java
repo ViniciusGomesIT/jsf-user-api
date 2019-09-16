@@ -1,12 +1,16 @@
 package br.com.api.model;
 
+import java.io.Serializable;
+
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @ConfigurationProperties(prefix = "messages")
 @Component
-public class MessageModel {
+public class MessageModel implements Serializable {
 
+	private static final long serialVersionUID = -7067557703562007762L;
+	
 	private String genericError;
 	private String genericInfo;
 	private String errorToGeneratePasswordEncrypted;

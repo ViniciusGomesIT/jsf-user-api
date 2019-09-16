@@ -1,9 +1,9 @@
 insert into tbg_telefone (ddd, numero, tipo) values (81, '998882555', 'P');
-insert into tbg_telefone (ddd, numero, tipo) values (81, '30303030', 'R');
+insert into tbg_telefone (ddd, numero, tipo) values (81, '30303030', 'H');
 insert into tbg_telefone (ddd, numero, tipo) values (81, '40404040', 'B');
 insert into tbg_telefone (ddd, numero, tipo) values (81, '80808080', 'Other');
 insert into tbg_telefone (ddd, numero, tipo) values (81, '999009987', 'P'); 
-insert into tbg_telefone (ddd, numero, tipo) values (11, '30336578', 'R');
+insert into tbg_telefone (ddd, numero, tipo) values (11, '30336578', 'H');
 
 insert into tbg_endereco (endereco, complemento, cep, bairro, cidade, estado) values ('RUA JABOATÃO DOS GUARARAPES, 256', 'BLOCO 1074, MÓDULO 332, APARTAMENTO 565', '50550550', 'JABOATÃO VELHO', 'JABOATÃO DOS GUARARAPES', 'PERNAMBUCO');
 insert into tbg_endereco (endereco, complemento, cep, bairro, cidade, estado) values ('RUA PIEDADE, 221', 'TRAVESSA 4', '85850850', 'PIEDADE', 'RECIFE', 'PERNAMBUCO');
