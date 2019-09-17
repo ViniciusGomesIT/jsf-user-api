@@ -12,7 +12,6 @@ import org.springframework.web.context.annotation.SessionScope;
 
 import br.com.api.controller.interfaces.LoginResource;
 import br.com.api.entity.UserEntity;
-import br.com.api.model.MessageModel;
 import br.com.api.response.UserResponse;
 import br.com.api.services.interfaces.LoginService;
 
@@ -27,7 +26,7 @@ public class LoginController implements LoginResource, Serializable {
 	private UserEntity user;
 	
 	@Inject
-	public LoginController(LoginService service, MessageModel message) {
+	public LoginController(LoginService service) {
 		this.loginService = service;
 		this.user = new UserEntity();
 	}
