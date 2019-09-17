@@ -1,21 +1,20 @@
 package br.com.api.security.utils;
 
-import javax.crypto.spec.SecretKeySpec;
-import javax.crypto.spec.IvParameterSpec;
+import java.util.Arrays;
 
-import java.io.UnsupportedEncodingException;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
-
-import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import net.bytebuddy.asm.Advice.This;
 
 public class GenerateAES {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(This.class);
+	
 	static String IV = "AAAAAAAAAAAAAAAA";
 
 	public static byte[] encrypt(String textopuro, String chaveEncriptacao) {
@@ -29,21 +28,11 @@ public class GenerateAES {
 			encripta.init(Cipher.ENCRYPT_MODE, key, new IvParameterSpec(IV.getBytes("UTF-8")));
 
 			return encripta.doFinal(textopuro.getBytes("UTF-8"));
-		} catch (NoSuchAlgorithmException | NoSuchProviderException | NoSuchPaddingException e) {
-			e.printStackTrace();
-		} catch (InvalidKeyException e) {
-			e.printStackTrace();
-		} catch (InvalidAlgorithmParameterException e) {
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		} catch (IllegalBlockSizeException e) {
-			e.printStackTrace();
-		} catch (BadPaddingException e) {
-			e.printStackTrace();
-		}
+		} catch (Exception e) {
+			LOGGER.error(Arrays.toString(e.getStackTrace()));
+		} 
 		
-		return null;
+		return new byte[0];
 	}
 
 	public static String decrypt(byte[] passwordAesEncypted, String chaveEncriptacao) {
@@ -56,23 +45,9 @@ public class GenerateAES {
 			decripta.init(Cipher.DECRYPT_MODE, key, new IvParameterSpec(IV.getBytes("UTF-8")));
 
 			return new String(decripta.doFinal(passwordAesEncypted), "UTF-8");
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		} catch (NoSuchProviderException e) {
-			e.printStackTrace();
-		} catch (NoSuchPaddingException e) {
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		} catch (IllegalBlockSizeException e) {
-			e.printStackTrace();
-		} catch (BadPaddingException e) {
-			e.printStackTrace();
-		} catch (InvalidKeyException e) {
-			e.printStackTrace();
-		} catch (InvalidAlgorithmParameterException e) {
-			e.printStackTrace();
-		}
+		} catch (Exception e) {
+			LOGGER.error(Arrays.toString(e.getStackTrace()));
+		} 
 		
 		return null;
 	}

@@ -17,8 +17,8 @@
                	<h:form>
                 	<p:toolbar>
 	                    <f:facet name="left">
-	                        <p:commandButton id="newUserButton" action="#{userController.newUser()}" value="New User" style="margin-right:30px;" ajax="false"/>
-	                        <p:button id="listBackButton" href="/pages/list.jsf" value="List Users" style="margin-right:30px;" />
+	                        <p:button id="newUserButton" href="/pages/register.jsf?faces-redirect=true" value="Register" styleClass="btn btn-default" />
+	                        <p:button id="listBackButton" href="/pages/list.jsf?faces-redirect=true" value="List of Users" style="margin-right:30px;"/>
 	                        <p:commandButton id="logoutButton" action="#{loginController.logout()}" value="Logout" />
 	                    </f:facet>
                 	</p:toolbar>

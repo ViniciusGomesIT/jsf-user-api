@@ -29,14 +29,6 @@ public class SaveUserRequest extends GenericRequest implements Serializable {
 	private String gender;
 	private String maritalStatus;
 
-	private Integer phone1DDD;
-	private String phone1Number;
-	private String phone1Type;
-
-	private Integer phone2DDD;
-	private String phone2Number;
-	private String phone2Type;
-
 	private String addressName;
 	private String addressComplement;
 	private String addressPostalCode;
@@ -146,54 +138,6 @@ public class SaveUserRequest extends GenericRequest implements Serializable {
 
 	public void setMaritalStatus(String maritalStatus) {
 		this.maritalStatus = maritalStatus;
-	}
-
-	public Integer getPhone1DDD() {
-		return phone1DDD;
-	}
-
-	public void setPhone1DDD(Integer phone1ddd) {
-		phone1DDD = phone1ddd;
-	}
-
-	public String getPhone1Number() {
-		return phone1Number;
-	}
-
-	public void setPhone1Number(String phone1Number) {
-		this.phone1Number = phone1Number;
-	}
-
-	public String getPhone1Type() {
-		return phone1Type;
-	}
-
-	public void setPhone1Type(String phone1Type) {
-		this.phone1Type = phone1Type;
-	}
-
-	public Integer getPhone2DDD() {
-		return phone2DDD;
-	}
-
-	public void setPhone2DDD(Integer phone2ddd) {
-		phone2DDD = phone2ddd;
-	}
-
-	public String getPhone2Number() {
-		return phone2Number;
-	}
-
-	public void setPhone2Number(String phone2Number) {
-		this.phone2Number = phone2Number;
-	}
-
-	public String getPhone2Type() {
-		return phone2Type;
-	}
-
-	public void setPhone2Type(String phone2Type) {
-		this.phone2Type = phone2Type;
 	}
 
 	public String getAddressName() {

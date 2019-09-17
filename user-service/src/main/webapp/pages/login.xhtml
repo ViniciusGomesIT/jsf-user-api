@@ -27,8 +27,8 @@
 					<p:commandButton action="#{loginController.authenticateUser}" value="Login" styleClass="btn btn-default" style="horizontal-align:center" update="messages"/>
 					<h:panelGroup>
 						<div>
-							<p:button href="/pages/reminder-password.jsf" value="Recover" styleClass="btn btn-default" style="margin-right:65px;"/>
-							<p:button href="/pages/register.jsf" value="Register" styleClass="btn btn-default" />
+							<p:button id="forgotPasswordButton" href="/pages/reminder-password.jsf?faces-redirect=true" value="Recover" styleClass="btn btn-default" style="margin-right:30px;"/>
+							<p:button id="newUserButton" href="/pages/register.jsf?faces-redirect=true" value="Register" styleClass="btn btn-default" />
 						</div>
 					</h:panelGroup>
 				</p:panelGrid>

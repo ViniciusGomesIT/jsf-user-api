@@ -17,7 +17,7 @@
                	<h:form>
 	                <p:toolbar>
 		                    <f:facet name="left">
-		                        <p:commandButton id="newUserButton" action="#{userController.newUser()}" value="New User" style="margin-right:30px;"/>
+		                        <p:button id="newUserButton" href="/pages/register.jsf?faces-redirect=true" value="Register" styleClass="btn btn-default" style="margin-right:30px;"/>
 		                        <p:commandButton id="logoutButton" action="#{loginController.logout()}" value="Logout"/>
 		                    </f:facet>
 	                </p:toolbar>

@@ -73,7 +73,7 @@ public class UserController implements UserResource, Serializable {
 		if ( saveUserRequest.getMessage().isEmpty() ) {
 			return "/pages/register.xhtml?faces-redirect=true";
 		}
-		FacesContext.getCurrentInstance().addMessage("UserController", new FacesMessage(userResponse.getMessageError()));
+		FacesContext.getCurrentInstance().addMessage("UserController", new FacesMessage(saveUserRequest.getMessage()));
 		
 		return "/pages/list.xhtml";
 	}
@@ -102,16 +102,11 @@ public class UserController implements UserResource, Serializable {
 		this.saveUserRequest.getPhones().add(new PhoneEntity());
 	}
 	
+	@Override
 	public void deletePhone() {
 		if ( !this.saveUserRequest.getPhones().isEmpty() && this.saveUserRequest.getPhones().size() >= 1 ) {
 			this.saveUserRequest.getPhones().remove(this.saveUserRequest.getPhones().size() - 1);
 		}
-	}
-	
-	public String newUser() {
-		this.saveUserRequest = new SaveUserRequest();
-		
-		return "/pages/register.xhtml?faces-redirect=true";
 	}
 	
 	public SaveUserRequest getSaveUserRequest() {

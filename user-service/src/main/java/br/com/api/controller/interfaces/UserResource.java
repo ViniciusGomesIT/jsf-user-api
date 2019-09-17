@@ -20,7 +20,7 @@ public interface UserResource {
 	
 	String checkPassword();
 	
-	String newUser();
+//	String newUser();
 	
 	void deletePhone();
 }

@@ -1,6 +1,7 @@
 package br.com.api.services.impl;
 
 import java.io.Serializable;
+import java.util.Base64;
 import java.util.Optional;
 
 import javax.inject.Inject;
@@ -11,7 +12,6 @@ import br.com.api.entity.UserEntity;
 import br.com.api.model.MessageModel;
 import br.com.api.repository.UserRepository;
 import br.com.api.response.UserResponse;
-import br.com.api.security.utils.GenerateMD5;
 import br.com.api.services.interfaces.LoginService;
 
 @Service
@@ -30,12 +30,12 @@ public class LoginServiceImpl implements LoginService, Serializable {
 	}
 
 	@Override
-	public UserResponse authenticateUser(UserEntity user) {
+	public UserResponse authenticateUser(UserEntity providedUserInfos) {
 		response = new UserResponse();
-		Optional<UserEntity> userOpt = userRepository.findByEmailIgnoreCase(user.getEmail());
+		Optional<UserEntity> userOptFromBase = userRepository.findByEmailIgnoreCase(providedUserInfos.getEmail());
 		
-		if ( userOpt.isPresent() && checkPassword(userOpt.get().getPassword(), user.getPassword()) ) {
-			response.setUser(userOpt); 
+		if ( userOptFromBase.isPresent() && checkPassword(userOptFromBase.get().getPassword(), providedUserInfos.getPassword()) ) {
+			response.setUser(userOptFromBase); 
 			
 			return response;
 		}
@@ -46,8 +46,8 @@ public class LoginServiceImpl implements LoginService, Serializable {
 		return response;
 	}
 
-	private boolean checkPassword(String passwordFromBase, String givenPassword) {
-		return passwordFromBase.matches(GenerateMD5.generate(givenPassword));
+	private Boolean checkPassword(String passwordFromBase, String givenPassword) {
+		return givenPassword.matches(new String(Base64.getDecoder().decode(passwordFromBase)));
 	}
 	
 }

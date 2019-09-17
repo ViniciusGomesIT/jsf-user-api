@@ -15,7 +15,7 @@ import br.com.api.services.interfaces.EmailService;
 
 @ViewScoped
 @Component(value = "emailSenderController")
-public class EmailSenderControllerImpl implements EmailSenderResource, Serializable {
+public class EmailSenderController implements EmailSenderResource, Serializable {
 
 	private static final long serialVersionUID = -3279789660119077386L;
 	
@@ -23,7 +23,7 @@ public class EmailSenderControllerImpl implements EmailSenderResource, Serializa
 	private String email;
 
 	@Inject
-	public EmailSenderControllerImpl(EmailService emailService) {
+	public EmailSenderController(EmailService emailService) {
 		this.emailService = emailService;
 	}
 

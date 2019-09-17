@@ -1,6 +1,7 @@
 package br.com.api.services.impl;
 
 import java.io.Serializable;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -15,13 +16,11 @@ import br.com.api.builders.UserEntityBuilder;
 import br.com.api.entity.AddressEntity;
 import br.com.api.entity.UserEntity;
 import br.com.api.model.MessageModel;
-import br.com.api.model.SecurityConfig;
 import br.com.api.repository.UserRepository;
 import br.com.api.request.ResetPasswordRequest;
 import br.com.api.request.SaveUserRequest;
 import br.com.api.response.UserListResponse;
 import br.com.api.response.UserResponse;
-import br.com.api.security.utils.GenerateAES;
 import br.com.api.security.utils.GenerateMD5;
 import br.com.api.services.interfaces.UserService;
 
@@ -33,13 +32,11 @@ public class UserServiceImpl implements UserService, Serializable {
 	private UserRepository userRepository;
 	private MessageModel message;
 	private UserResponse userResponse;
-	private SecurityConfig secutiryConfig;
 	
 	@Inject
-	public UserServiceImpl(UserRepository userRepository, MessageModel message, SecurityConfig secutiryConfig) {
+	public UserServiceImpl(UserRepository userRepository, MessageModel message) {
 		this.userRepository = userRepository;
 		this.message = message;
-		this.secutiryConfig = secutiryConfig;
 	}
 
 	@Override
@@ -58,14 +55,13 @@ public class UserServiceImpl implements UserService, Serializable {
 		
 		user = buildUserEntity(saveUserRequest);
 		
-		byte[] passwordAesEncypted = GenerateAES.encrypt(saveUserRequest.getPassword(), secutiryConfig.getKey());
-		String passwordAesDecrypted = GenerateAES.decrypt(passwordAesEncypted, secutiryConfig.getKey());
-		
-		user.setPassword(GenerateMD5.generate(saveUserRequest.getPassword()));
+		user.setPassword(Base64.getEncoder().encodeToString(saveUserRequest.getPassword().getBytes()));
 		
 		user.setRegistrationDate(new Date());
 		
-		userResponse.setUser( userRepository.save(user) );
+		if ( userResponse.getMessageError().isEmpty() ) {
+			userResponse.setUser( userRepository.save(user) );
+		} 
 		
 		return userResponse;
 	}
@@ -86,7 +82,6 @@ public class UserServiceImpl implements UserService, Serializable {
 		user = buildUserEntity(saveUserRequest);
 		
 		if ( userResponse.getMessageError().isEmpty() ) {
-			
 			userResponse.setUser( userRepository.save(user) );
 		} 
 		
@@ -98,6 +93,9 @@ public class UserServiceImpl implements UserService, Serializable {
 		UserListResponse userListResponse = new UserListResponse();
 		
 		List<UserEntity> userList = userRepository.findAll();
+		
+		userList.forEach(user -> user.setPassword(GenerateMD5.generate(user.getPassword())));
+		
 		userListResponse.setUserList(userList);
 		
 		return userListResponse;
@@ -117,7 +115,7 @@ public class UserServiceImpl implements UserService, Serializable {
 			return buildSaveUserRequest(userOpt.get());
 		}
 		
-		saveUserRequest.setStateName(message.getUserNotFound());
+		saveUserRequest.setMessage(message.getUserNotFound());
 		return saveUserRequest;
 	}
 	
@@ -129,9 +127,10 @@ public class UserServiceImpl implements UserService, Serializable {
 		
 		if ( userOpt.isPresent() ) {
 			user = userOpt.get();
-			if (user.getPassword().matches(GenerateMD5.generate(passwordRequest.getOldPassword()))) {
+			String oldPassword = new String(Base64.getDecoder().decode(user.getPassword()));
+			if (oldPassword.matches(passwordRequest.getOldPassword())) {
 				
-				user.setPassword(GenerateMD5.generate(passwordRequest.getNewPassword()));
+				user.setPassword(Base64.getEncoder().encodeToString(passwordRequest.getNewPassword().getBytes()));
 				userRepository.save(user);
 				userResponse.setUser(user);
 				userResponse.setMessage(message.getPasswordChangedSucess());
