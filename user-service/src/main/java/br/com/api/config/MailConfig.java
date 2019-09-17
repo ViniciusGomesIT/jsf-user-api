@@ -37,9 +37,9 @@ public class MailConfig {
 		props.put("mail.smtp.connectionTimeout", 10000);
 //		props.put("mail.smtp.starttls.required", emailConfig.getStarttlsRequired());
 //		props.put("mail.smtp.ssl.enable", emailConfig.getSslEnable());
-//		properties.put("mail.smtp.socketFactory.port", "465");  
-//		properties.put("mail.smtp.socketFactory.fallback", "false");  
-//		properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+//		props.put("mail.smtp.socketFactory.port", "465");  
+//		props.put("mail.smtp.socketFactory.fallback", "false");  
+//		props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 
 		mailSender.setJavaMailProperties(props);
 

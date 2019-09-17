@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
@@ -14,15 +13,15 @@ import br.com.api.builders.AddressBuilder;
 import br.com.api.builders.SaveUserRequestBuilder;
 import br.com.api.builders.UserEntityBuilder;
 import br.com.api.entity.AddressEntity;
-import br.com.api.entity.PhoneEntity;
 import br.com.api.entity.UserEntity;
 import br.com.api.model.MessageModel;
-import br.com.api.repository.PhoneRepository;
+import br.com.api.model.SecurityConfig;
 import br.com.api.repository.UserRepository;
 import br.com.api.request.ResetPasswordRequest;
 import br.com.api.request.SaveUserRequest;
 import br.com.api.response.UserListResponse;
 import br.com.api.response.UserResponse;
+import br.com.api.security.utils.GenerateAES;
 import br.com.api.security.utils.GenerateMD5;
 import br.com.api.services.interfaces.UserService;
 
@@ -32,37 +31,62 @@ public class UserServiceImpl implements UserService, Serializable {
 	private static final long serialVersionUID = -6733962411945021876L;
 	
 	private UserRepository userRepository;
-	private PhoneRepository phoneRepository;
 	private MessageModel message;
 	private UserResponse userResponse;
+	private SecurityConfig secutiryConfig;
 	
 	@Inject
-	public UserServiceImpl(UserRepository userRepository, PhoneRepository phoneRepository, MessageModel message) {
+	public UserServiceImpl(UserRepository userRepository, MessageModel message, SecurityConfig secutiryConfig) {
 		this.userRepository = userRepository;
-		this.phoneRepository = phoneRepository;
 		this.message = message;
+		this.secutiryConfig = secutiryConfig;
 	}
 
 	@Override
 	public UserResponse saveUser(SaveUserRequest saveUserRequest) {
 		UserEntity user;
-		userResponse = new UserResponse();
 		
-		checkConfirmEmail(saveUserRequest);
+		if ( null != saveUserRequest.getId()) {
+			return updateUser(saveUserRequest);
+		}
+		
+		userResponse = new UserResponse();
 		
 		checkEmailRegistered(saveUserRequest);
 		
-		checkPhonesRegistered(saveUserRequest);
+		checkConfirmEmail(saveUserRequest);
 		
 		user = buildUserEntity(saveUserRequest);
 		
+		byte[] passwordAesEncypted = GenerateAES.encrypt(saveUserRequest.getPassword(), secutiryConfig.getKey());
+		String passwordAesDecrypted = GenerateAES.decrypt(passwordAesEncypted, secutiryConfig.getKey());
+		
 		user.setPassword(GenerateMD5.generate(saveUserRequest.getPassword()));
 		
-		if ( user.getRegistrationDate() != null) {
-			user.setRegistrationDate(new Date());
+		user.setRegistrationDate(new Date());
+		
+		userResponse.setUser( userRepository.save(user) );
+		
+		return userResponse;
+	}
+	
+	@Override
+	public UserResponse updateUser(SaveUserRequest saveUserRequest) {
+		UserEntity user;
+		userResponse = new UserResponse();
+		
+		user =  this.userRepository.findById(saveUserRequest.getId()).get();
+		
+		if ( !user.getEmail().equalsIgnoreCase(saveUserRequest.getEmail()) ) {
+			checkEmailRegistered(saveUserRequest);
 		}
 		
+		checkConfirmEmail(saveUserRequest);
+		
+		user = buildUserEntity(saveUserRequest);
+		
 		if ( userResponse.getMessageError().isEmpty() ) {
+			
 			userResponse.setUser( userRepository.save(user) );
 		} 
 		
@@ -161,21 +185,9 @@ public class UserServiceImpl implements UserService, Serializable {
 		}
 	}
 	
-	private void checkPhonesRegistered(SaveUserRequest saveUserRequest) {
-		List<PhoneEntity> listPhones = saveUserRequest.getPhones()
-				.stream()
-				.map(phone -> phoneRepository.findByDddAndNumber(phone.getDdd(), phone.getNumber()))
-				.filter(Optional::isPresent)
-				.map(Optional::get)
-				.collect(Collectors.toList());
-		
-		if ( !listPhones.isEmpty() ) {
-			userResponse.setErrorMessage(message.getPhoneAlreadyRegistered());
-		}
-	}
-	
 	private SaveUserRequest buildSaveUserRequest(UserEntity userEntity) {
 		return new SaveUserRequestBuilder()
+				.withId(userEntity.getId())
 				.withName(userEntity.getName())
 				.withEmail(userEntity.getEmail())
 				.withEmailConfirm(userEntity.getEmail())
@@ -194,5 +206,4 @@ public class UserServiceImpl implements UserService, Serializable {
 				.withPhones(userEntity.getPhones())
 				.build();
 	}
-
 }

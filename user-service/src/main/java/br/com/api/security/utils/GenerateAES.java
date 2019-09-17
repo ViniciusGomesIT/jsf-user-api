@@ -18,17 +18,17 @@ public class GenerateAES {
 
 	static String IV = "AAAAAAAAAAAAAAAA";
 
-	public String encrypt(String textopuro, String chaveencriptacao) {
+	public static byte[] encrypt(String textopuro, String chaveEncriptacao) {
 		Cipher encripta;
 
 		try {
 			encripta = Cipher.getInstance("AES/CBC/PKCS5Padding", "SunJCE");
 
-			SecretKeySpec key = new SecretKeySpec(chaveencriptacao.getBytes("UTF-8"), "AES");
+			SecretKeySpec key = new SecretKeySpec(chaveEncriptacao.getBytes("UTF-8"), "AES");
 
 			encripta.init(Cipher.ENCRYPT_MODE, key, new IvParameterSpec(IV.getBytes("UTF-8")));
 
-			return encripta.doFinal(textopuro.getBytes("UTF-8")).toString();
+			return encripta.doFinal(textopuro.getBytes("UTF-8"));
 		} catch (NoSuchAlgorithmException | NoSuchProviderException | NoSuchPaddingException e) {
 			e.printStackTrace();
 		} catch (InvalidKeyException e) {
@@ -46,16 +46,16 @@ public class GenerateAES {
 		return null;
 	}
 
-	public String decrypt(String textoencriptado, String chaveencriptacao) {
+	public static String decrypt(byte[] passwordAesEncypted, String chaveEncriptacao) {
 		Cipher decripta;
 		try {
 			decripta = Cipher.getInstance("AES/CBC/PKCS5Padding", "SunJCE");
 
-			SecretKeySpec key = new SecretKeySpec(chaveencriptacao.getBytes("UTF-8"), "AES");
+			SecretKeySpec key = new SecretKeySpec(chaveEncriptacao.getBytes("UTF-8"), "AES");
 
 			decripta.init(Cipher.DECRYPT_MODE, key, new IvParameterSpec(IV.getBytes("UTF-8")));
 
-			return new String(decripta.doFinal(textoencriptado.getBytes()), "UTF-8");
+			return new String(decripta.doFinal(passwordAesEncypted), "UTF-8");
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		} catch (NoSuchProviderException e) {

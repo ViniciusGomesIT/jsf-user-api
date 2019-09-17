@@ -16,4 +16,6 @@ public interface UserService {
 	SaveUserRequest editUser(Long id);
 	
 	UserResponse checkAndUpdatePassword(ResetPasswordRequest passwordRequest);
+
+	UserResponse updateUser(SaveUserRequest saveUserRequest);
 }

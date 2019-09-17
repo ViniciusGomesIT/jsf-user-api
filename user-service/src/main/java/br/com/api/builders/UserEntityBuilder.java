@@ -77,6 +77,7 @@ public class UserEntityBuilder {
 	public UserEntity build() {
 		UserEntity user = new UserEntity();
 		
+		user.setId(id);
 		user.setName(name);
 		user.setEmail(email);
 		user.setPassword(password);

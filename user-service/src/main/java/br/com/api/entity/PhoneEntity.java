@@ -17,7 +17,7 @@ public class PhoneEntity {
 	@Column(name = "ddd", nullable = false)
 	private Integer ddd;
 
-	@Column(name = "numero", nullable = false, unique = true)
+	@Column(name = "numero", nullable = false)
 	private String number;
 
 	@Column(name = "tipo", nullable = false)

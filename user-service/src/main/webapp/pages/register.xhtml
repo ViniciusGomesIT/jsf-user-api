@@ -10,101 +10,110 @@
 <ui:composition template="/templates/layout-register.xhtml">
     <ui:define name="content">
         <h:form id="registerForm">
-        	<p:messages id="messages" />
+        	<h:messages id="messages" />
+        	<p:message for="name" />
+        	<p:message for="phonesGroup" />
+            <p:message for="email" />
+            <p:message for="emailConfirm" />
+            <p:message for="password" />
+            <p:message for="passwordConfirm" />
+            <p:message for="dateOfBirth" />
+            <p:message for="gender"/>
+            <p:message for="maritalStatus" />
+            <p:message for="address" />
+            <p:message for="addressComplement" />
+            <p:message for="postalCode" />
+            <p:message for="neighborhood" />
+            <p:message for="city" />
+            <p:message for="state" />
+            
             <p:panel header="User Details">
-                <h:panelGrid columns="2">
+                <p:panelGrid columns="2">
+                	
+            		<p:outputLabel for="name" value="Name: " />
                 	<h:panelGroup>
-                			<p:outputLabel for="name" value="Name: " />
-	                    	<p:inputText id="name" value="#{userController.saveUserRequest.name}" required="true" 
-	                    		requiredMessage="You need to inform an name!" maxlength="100" size="50">
-	                    	</p:inputText>
+                    	<p:inputText id="name" value="#{userController.saveUserRequest.name}" required="true" 
+                    		requiredMessage="You need to inform an name!" maxlength="100" size="50">
+                    	</p:inputText>
                 	</h:panelGroup>
-                	<h:message for="name" />
                 	
            			<p:outputLabel value="Phones: "/>
-           			<h:panelGroup id="phonesGroup">
+          			<h:panelGroup id="phonesGroup">
            				<p:repeat var="phone" value="#{userController.saveUserRequest.phones}">
-              				<p:outputLabel for="ddd" value="DDD: " /> 
-                       		<p:inputText id="ddd" value="#{phone.ddd}" size="5" maxlength="5" />
-                        	
-                       		<p:outputLabel for="number" value="Number: " /> 
-                       		<p:inputText id="number" value="#{phone.number}" size="10" maxlength="10" onchange="{phone.number}"/>
-                        	
-                       		<p:outputLabel for="phoneType" value="Type: " /> 
-                       		<h:selectOneMenu id="phoneType" value="#{phone.type}" required="true" requiredMessage="You must select a option" > 
-		                   		<f:selectItem itemValue="#{null}" 	itemLabel="Select" />
-							   	<f:selectItem itemValue="P" 		itemLabel="Personal" />
-							   	<f:selectItem itemValue="H" 		itemLabel="Home" />
-							   	<f:selectItem itemValue="B" 		itemLabel="Business" />
-							   	<f:selectItem itemValue="Other" 	itemLabel="Other" />
-							</h:selectOneMenu>
+           					<div>
+	              				<p:outputLabel for="ddd" value="DDD: " /> 
+	                       		<p:inputText id="ddd" value="#{phone.ddd}" size="5" maxlength="5" />
+	                        	
+	                       		<p:outputLabel for="number" value="Number: " /> 
+	                       		<p:inputText id="number" value="#{phone.number}" size="10" maxlength="10" onchange="{phone.number}"/>
+	                        	
+	                       		<p:outputLabel for="phoneType" value="Type: " /> 
+	                       		<h:selectOneMenu id="phoneType" value="#{phone.type}" required="true" requiredMessage="You must select a option" > 
+			                   		<f:selectItem itemValue="#{null}" 	itemLabel="Select" />
+								   	<f:selectItem itemValue="P" 		itemLabel="Personal" />
+								   	<f:selectItem itemValue="H" 		itemLabel="Home" />
+								   	<f:selectItem itemValue="B" 		itemLabel="Business" />
+								   	<f:selectItem itemValue="Other" 	itemLabel="Other" />
+								</h:selectOneMenu>
+							</div>
                    		</p:repeat>
+                   	<p:commandButton id="addPhone" icon="ui-icon-plus" action="#{userController.addPhone()}" update="phonesGroup" process="@this" style="margin-right:30px;" />
+                   	<p:commandButton id="deletePhone" icon="ui-icon-minus" action="#{userController.deletePhone()}" update="phonesGroup" process="@this" rendered="#{userController.saveUserRequest.phones.size() >= 1}"/>
 					</h:panelGroup>
-               		<p:commandButton id="addPhone" icon="ui-icon-plus" value="add" action="#{userController.addPhone(phone)}" update="phonesGroup" process="@this" />
-                	
-               		<h:message for="ddd" /> 
-                	<h:message for="number" />                	
-                	<h:message for="phoneType" /> 
-                	
+					
+               		<p:outputLabel for="email" value="Email: " />
                 	<h:panelGroup>
-                		<p:outputLabel for="email" value="Email: " />
                     	<p:inputText id="email" value="#{userController.saveUserRequest.email}" required="true" 
                     		requiredMessage="You need to inform an email!" maxlength="120" size="50" validatorMessage="Invalid email format" >
                     		 <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
                    		</p:inputText>
                 	</h:panelGroup>
-                	<h:message for="email" />
                 	
+                    <p:outputLabel for="emailConfirm" value="Email Confirm: " />
                 	<h:panelGroup>
-	                    <p:outputLabel for="emailConfirm" value="Email Confirm: " />
 	                    <p:inputText id="emailConfirm" value="#{userController.saveUserRequest.emailConfirm}" required="true" 
-	                    	requiredMessage="You need to confirm email!" maxlength="120" size="50" >
+	                    	requiredMessage="You need to confirm email!" maxlength="120" size="50" validatorMessage="Invalid email format">
 	                    	<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 	                    </p:inputText>
                 	</h:panelGroup>
-                	<h:message for="emailConfirm" />
                     
+	                <p:outputLabel for="password" value="Password: " rendered="#{userController.saveUserRequest.renderPassword}"/>
                     <h:panelGroup rendered="#{userController.saveUserRequest.renderPassword}">
-	                    <p:outputLabel for="password" value="Password: " />
 	                    <p:password id="password" value="#{userController.saveUserRequest.password}" required="true" match="passwordConfirm"
 	                    	requiredMessage="You need to inform an password!" validatorMessage="The passwords not match or is too short" maxlength="30" 
 	                    	size="20" redisplay="false" rendered="#{userController.saveUserRequest.renderPassword}">
 	                    	<f:validateLength minimum="6" maximum="30" />
 	                    </p:password>
                 	</h:panelGroup>
-                	<h:message for="password" />
                 	
+	                <p:outputLabel for="passwordConfirm" value="Password Confirm: " rendered="#{userController.saveUserRequest.renderPassword}"/>
                 	<h:panelGroup rendered="#{userController.saveUserRequest.renderPassword}">
-	                    <p:outputLabel for="passwordConfirm" value="Password Confirm: " />
 	                    <p:password id="passwordConfirm" value="#{userController.saveUserRequest.passwordConfirm}" required="true" 
 	                    	requiredMessage="You need to confirm password!" validatorMessage="The given password is too short" maxlength="30" 
 	                    	size="20" redisplay="false" rendered="#{userController.saveUserRequest.renderPassword}">
 	                    	<f:validateLength minimum="6" maximum="30" />
 	                    </p:password>
                 	</h:panelGroup>
-                	<h:message for="passwordConfirm" />
                 	                    
+     				<p:outputLabel for="dateOfBirth" value="Date of Birth: " />
 					<h:panelGroup>
-     					<p:outputLabel for="dateOfBirth" value="Date of Birth: " />
                     	<p:inputMask id="dateOfBirth" value="#{userController.saveUserRequest.dateOfBirth}" mask="99/99/9999">
                     		<f:convertDateTime pattern="dd/MM/yyyy"/>
                    		</p:inputMask>
                 	</h:panelGroup>                    	
-                	<h:message for="dateOfBirth" />
                 	
+       				<p:outputLabel for="gender" value="Gender: " />
                 	<h:panelGroup>
-       					<p:outputLabel for="gender" value="Gender: " />
 				      	<h:selectOneMenu id="gender" value="#{userController.saveUserRequest.gender}" required="true" requiredMessage="You must select a option">
 				      		<f:selectItem itemValue="#{null}" 	itemLabel="Select" />
                    			<f:selectItem itemValue="F" 		itemLabel="F" />
 						   	<f:selectItem itemValue="M" 		itemLabel="M" />
 						   	<f:selectItem itemValue="Other" 	itemLabel="Other" />
 						</h:selectOneMenu>
-                       	</h:panelGroup>                    	
-                	<h:message for="gender" />
+                    </h:panelGroup>                    	
                 	
+	                <p:outputLabel for="maritalStatus" value="Marital Status: " />
                 	<h:panelGroup>
-	                	<p:outputLabel for="maritalStatus" value="Marital Status: " />
 				      	<h:selectOneMenu id="maritalStatus" value="#{userController.saveUserRequest.maritalStatus}" required="true" requiredMessage="You must select a option">
 				      		<f:selectItem itemValue="#{null}" 		itemLabel="Select" />
                    			<f:selectItem itemValue="Not Married" 	itemLabel="Not Married" />
@@ -113,61 +122,54 @@
 						   	<f:selectItem itemValue="Other" 		itemLabel="Other" />
 						</h:selectOneMenu>
 	               	</h:panelGroup>                    	
-                	<h:message for="maritalStatus" />
                 	
+       				<p:outputLabel for="address" value="Address: " />
                 	<h:panelGroup>
-       					<p:outputLabel for="address" value="Address: " />
                     	<p:inputText id="address" value="#{userController.saveUserRequest.addressName}" required="true"
                     		requiredMessage="You must inform an address" maxlength="150" size="50" >
                    		</p:inputText>
                 	</h:panelGroup>                    	
-                	<h:message for="address" />
                 	
+       				<p:outputLabel for="addressComplement" value="Complement: " />
                 	<h:panelGroup>
-       					<p:outputLabel for="addressComplement" value="Complement: " />
                     	<p:inputText id="addressComplement" value="#{userController.saveUserRequest.addressComplement}" 
                     		maxlength="150" size="50" >
                    		</p:inputText>
                 	</h:panelGroup>                    	
-                	<h:message for="addressComplement" />
                 	
+     				<p:outputLabel for="postalCode" value="Postal Code: " />
                 	<h:panelGroup>
-       					<p:outputLabel for="postalCode" value="Postal Code: " />
                     	<p:inputText id="postalCode" value="#{userController.saveUserRequest.addressPostalCode}" required="true"
                     		requiredMessage="You must inform an postal code" maxlength="50" size="20" >
                    		</p:inputText>
                 	</h:panelGroup>                    	
-                	<h:message for="postalCode" />
                 	
+    				<p:outputLabel for="neighborhood" value="Neighborhood: " />
                 	<h:panelGroup>
-       					<p:outputLabel for="neighborhood" value="Neighborhood: " />
                     	<p:inputText id="neighborhood" value="#{userController.saveUserRequest.neighborhoodName}" required="true"
                     		requiredMessage="You must inform an neighborhood" maxlength="50" size="20" >
                    		</p:inputText>
                 	</h:panelGroup>                    	
-                	<h:message for="neighborhood" />
                 	
+     				<p:outputLabel for="city" value="City: " />
                 	<h:panelGroup>
-       					<p:outputLabel for="city" value="City: " />
                     	<p:inputText id="city" value="#{userController.saveUserRequest.cityName}" required="true"
                     		requiredMessage="You must inform an city" maxlength="50" size="20" >
                    		</p:inputText>
                 	</h:panelGroup>                    	
-                	<h:message for="city" />
                 	
+       				<p:outputLabel for="state" value="State: " />
                 	<h:panelGroup>
-       					<p:outputLabel for="state" value="State: " />
                     	<p:inputText id="state" value="#{userController.saveUserRequest.stateName}" required="true"
                     		requiredMessage="You must inform an state" maxlength="50" size="20" >
                    		</p:inputText>
                 	</h:panelGroup>                    	
-                	<h:message for="state" />
                 	
                 	<h:panelGroup>
-	                    <h:commandButton value="Save" action="#{userController.save}" />
-	                    <h:commandButton value="Reset" type="reset" rendered="#{userController.saveUserRequest.renderReset}"/>
+	                    <p:commandButton id="saveButton" value="Save" action="#{userController.save}" style="margin-right:30px;" update="messages"/>
+	                    <p:commandButton id="resetButton" value="Reset" type="reset" rendered="#{userController.saveUserRequest.renderReset}" update="messages"/>
                 	</h:panelGroup>
-                </h:panelGrid>
+                </p:panelGrid>
             </p:panel>
         </h:form>
     </ui:define>

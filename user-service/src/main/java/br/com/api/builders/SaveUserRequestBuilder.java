@@ -8,6 +8,7 @@ import br.com.api.request.SaveUserRequest;
 
 public class SaveUserRequestBuilder {
 	
+	private Long id;
 	private String name;
 	
 	private String password;
@@ -29,6 +30,11 @@ public class SaveUserRequestBuilder {
 	private String stateName;
 
 	private List<PhoneEntity> phones;
+	
+	public SaveUserRequestBuilder withId(Long id) {
+		this.id = id;
+		return this;
+	}
 	
 	public SaveUserRequestBuilder withName(String name) {
 		this.name = name;
@@ -113,6 +119,7 @@ public class SaveUserRequestBuilder {
 	public SaveUserRequest build() {
 		SaveUserRequest request = new SaveUserRequest();
 		
+		request.setId(id);
 		request.setName(name);
 		request.setEmail(email);
 		request.setEmailConfirm(emailConfirm);

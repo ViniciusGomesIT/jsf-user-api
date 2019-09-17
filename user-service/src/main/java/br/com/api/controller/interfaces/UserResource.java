@@ -2,7 +2,6 @@ package br.com.api.controller.interfaces;
 
 import java.util.List;
 
-import br.com.api.entity.PhoneEntity;
 import br.com.api.entity.UserEntity;
 
 public interface UserResource {
@@ -17,7 +16,11 @@ public interface UserResource {
 	
 	String editPassword(Long id);
 	
-	void addPhone(PhoneEntity phone);
+	void addPhone();
 	
 	String checkPassword();
+	
+	String newUser();
+	
+	void deletePhone();
 }

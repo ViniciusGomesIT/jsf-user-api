@@ -9,30 +9,26 @@
 <ui:composition template="/templates/layout-login.xhtml">
 	<ui:define name="content">
 		<h:form id="loginForm">
-			<p:messages id="messages" />
-			<p:message for="userPassword"/>
-			<p:message for="userEmail"/>
+			<h:messages id="messages"/>
+			<h:message for="userPassword"/>
+			<h:message for="userEmail"/>
+			
 			<p:panel header="Login">
-				<p:panelGrid columns="2" styleClass="border: none">
-					<p:outputLabel for="name" value="Email: " />
+				<p:panelGrid columns="2">
+				
+					<p:outputLabel for="userEmail" value="Email: " />
 					<p:inputText id="userEmail" value="#{loginController.user.email}"
 						required="true" requiredMessage="You must informe an email!" />
 
 					<p:outputLabel for="userPassword" value="Password: " />
-					<p:password id="userPassword"
-						value="#{loginController.user.password}" required="true"
+					<p:password id="userPassword" value="#{loginController.user.password}" required="true"
 						requiredMessage="You must informe an password!" />
 
-					<h:commandButton action="#{loginController.authenticateUser}"
-						value="Login" styleClass="btn btn-default" />
+					<p:commandButton action="#{loginController.authenticateUser}" value="Login" styleClass="btn btn-default" style="horizontal-align:center" update="messages"/>
 					<h:panelGroup>
 						<div>
-							<h:button href="/pages/reminder-password.jsf" value="Recover"
-								styleClass="btn btn-default" />
-						</div>
-						<div>
-							<h:button href="/pages/register.jsf" value="Register"
-								styleClass="btn btn-default" />
+							<p:button href="/pages/reminder-password.jsf" value="Recover" styleClass="btn btn-default" style="margin-right:65px;"/>
+							<p:button href="/pages/register.jsf" value="Register" styleClass="btn btn-default" />
 						</div>
 					</h:panelGroup>
 				</p:panelGrid>

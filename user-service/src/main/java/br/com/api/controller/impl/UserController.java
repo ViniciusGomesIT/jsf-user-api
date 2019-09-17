@@ -45,9 +45,9 @@ public class UserController implements UserResource, Serializable {
 		if ( userResponse.getUser().isPresent() ) {
 			return "/pages/list.xhtml?faces-redirect=true";
 		}
-		FacesContext.getCurrentInstance().addMessage("UserController", new FacesMessage(saveUserRequest.getMessage()));
+		FacesContext.getCurrentInstance().addMessage("UserController", new FacesMessage(userResponse.getMessageError()));
 		
-		return "/pages/register?faces-redirect=true";
+		return "/pages/register";
 	}
 	
 	@Override
@@ -65,15 +65,17 @@ public class UserController implements UserResource, Serializable {
 	@Override
 	public String editUser(Long id) {
 		this.saveUserRequest = service.editUser(id);
-		this.saveUserRequest.setRenderPassword(false);
+		
 		this.saveUserRequest.setRenderReset(false);
+		this.saveUserRequest.setRenderPassword(false);
+		
 		
 		if ( saveUserRequest.getMessage().isEmpty() ) {
 			return "/pages/register.xhtml?faces-redirect=true";
 		}
 		FacesContext.getCurrentInstance().addMessage("UserController", new FacesMessage(userResponse.getMessageError()));
 		
-		return "/pages/list.xhtml?faces-redirect=true";
+		return "/pages/list.xhtml";
 	}
 	
 	@Override
@@ -87,18 +89,29 @@ public class UserController implements UserResource, Serializable {
 		userResponse = this.service.checkAndUpdatePassword(passwordRequest);
 		
 		if (userResponse.getMessageError().isEmpty()) {
-			FacesContext.getCurrentInstance().addMessage("UserController", new FacesMessage(userResponse.getMessages()));
 			return "/pages/list.xhtml?faces-redirect=true";
 		}
 		
 		FacesContext.getCurrentInstance().addMessage("UserController", new FacesMessage(userResponse.getMessageError()));
 		
-		return "/pages/edit-password?faces-redirect=true";
+		return "/pages/edit-password";
 	}
-
+	
 	@Override
-	public void addPhone(PhoneEntity phone) {
+	public void addPhone() {
 		this.saveUserRequest.getPhones().add(new PhoneEntity());
+	}
+	
+	public void deletePhone() {
+		if ( !this.saveUserRequest.getPhones().isEmpty() && this.saveUserRequest.getPhones().size() >= 1 ) {
+			this.saveUserRequest.getPhones().remove(this.saveUserRequest.getPhones().size() - 1);
+		}
+	}
+	
+	public String newUser() {
+		this.saveUserRequest = new SaveUserRequest();
+		
+		return "/pages/register.xhtml?faces-redirect=true";
 	}
 	
 	public SaveUserRequest getSaveUserRequest() {

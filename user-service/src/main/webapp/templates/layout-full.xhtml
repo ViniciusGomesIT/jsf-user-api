@@ -14,13 +14,15 @@
     <h:body>
         <div class="ui-g">
             <div class="ui-g-12">
-                <p:toolbar>
-                    <f:facet name="left">
-                        <p:button href="/pages/register.jsf" value="New User" />
-                        <p:button href="/pages/list.jsf" value="List Users" />
-                        <p:commandButton action="#{loginController.logout()}" value="Logout"/>
-                    </f:facet>
-                </p:toolbar>
+               	<h:form>
+                	<p:toolbar>
+	                    <f:facet name="left">
+	                        <p:commandButton id="newUserButton" action="#{userController.newUser()}" value="New User" style="margin-right:30px;" ajax="false"/>
+	                        <p:button id="listBackButton" href="/pages/list.jsf" value="List Users" style="margin-right:30px;" />
+	                        <p:commandButton id="logoutButton" action="#{loginController.logout()}" value="Logout" />
+	                    </f:facet>
+                	</p:toolbar>
+                </h:form>
             </div>
             <div class="ui-g-12" align="center">
                 <ui:insert name="content" />

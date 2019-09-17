@@ -24,24 +24,25 @@ spring:
     username: root
     password: 542865
   mail:
-    starttls-enable: true
-    starttls-required: true
-    username: emailsender258@gmail.com    password: Pkp25j67*Lmnk
-    port: 587
     host: smtp.gmail.com
-    connection-timeout: 1000
-    ssl-enable: false
-    emailSender: emailsender258@gmail.com
-#    properties:
-      
-#    test-connection: true 
-#    
-#    protocol: smtp
-#    auth: true
-#    sslEnable: false
-#    starttlsEnable: true
-#    starttlsRequired: true
-    
+    port: 587
+    protocol: smtp    username: emailsender258@gmail.com
+    password: Pkp25j67*Lmnk
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          quitwait: false
+          socketFactory:
+            port: 465
+            class: javax.net.ssl.SSLSocketFactory
+          connection-timeout: 1000
+          ssl:
+            trust: smtp.gmail.com
+              
             
 security:
   key: de040b801e9df29ca714ab7f3d97db8c

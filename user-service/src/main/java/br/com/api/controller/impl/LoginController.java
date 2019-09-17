@@ -45,7 +45,7 @@ public class LoginController implements LoginResource, Serializable {
 		
 		FacesContext.getCurrentInstance().addMessage("LoginController", new FacesMessage(userResponse.getMessageError()));
 		
-		return "/pages/login.xhtml?faces-redirect=true";
+		return "/pages/login.xhtml";
 	}
 	
 	public String logout() {
