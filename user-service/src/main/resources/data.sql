@@ -73,11 +73,15 @@ insert into tbg_telefone (id, ddd, numero, tipo) values (3, 81, '40404040', 'B')
 insert into tbg_telefone (id, ddd, numero, tipo) values (4, 81, '80808080', 'Other');
 insert into tbg_telefone (id, ddd, numero, tipo) values (5, 11, '30336578', 'H');
 
-insert into tbg_endereco (id, endereco, complemento, cep, bairro, cidade, estado) values (1, 'RUA JABOATÃO DOS GUARARAPES, 256', 'BLOCO 1074, MÓDULO 332, APARTAMENTO 565', '50550550', 'JABOATÃO VELHO', 'JABOATÃO DOS GUARARAPES', 'PERNAMBUCO');
-insert into tbg_endereco (id, endereco, complemento, cep, bairro, cidade, estado) values (2, 'RUA PIEDADE, 221', 'TRAVESSA 4', '85850850', 'PIEDADE', 'RECIFE', 'PERNAMBUCO');
+insert into tbg_endereco (id, endereco, complemento, cep, bairro, cidade, estado) 
+	values (1, 'RUA JABOATÃO DOS GUARARAPES, 256', 'BLOCO 1074, MÓDULO 332, APARTAMENTO 565', '50550550', 'JABOATÃO VELHO', 'JABOATÃO DOS GUARARAPES', 'PERNAMBUCO');
+insert into tbg_endereco (id, endereco, complemento, cep, bairro, cidade, estado) 
+	values (2, 'RUA PIEDADE, 221', 'TRAVESSA 4', '85850850', 'PIEDADE', 'RECIFE', 'PERNAMBUCO');
 
-insert into tbg_usuario (id, nome, email, senha, data_registro, genero, estado_civil, data_nascimento, endereco_id) values (1, 'ADMINISTRADOR', 'ADMINISTRADOR_USER@BOL.COM.BR', 'MTIzNDU2', parsedatetime('15-09-2019', 'dd-MM-yyyy'), 'F', 'Married', parsedatetime('20-05-1959', 'dd-MM-yyyy'), 1);
-insert into tbg_usuario (id, nome, email, senha, data_registro, genero, estado_civil, data_nascimento, endereco_id) values (2, 'USER OTHER', 'USER_OTHER@OUTLOOK.COM.BR', 'MTIzNDU2', parsedatetime('03-005-2012', 'dd-MM-yyyy'), 'Other', 'Divorced', parsedatetime('19-03-1974', 'dd-MM-yyyy'), 2);
+insert into tbg_usuario (id, nome, email, senha, data_registro, genero, estado_civil, data_nascimento, endereco_id) 
+	values (1, 'ADMINISTRADOR', 'ADMINISTRADOR_USER@BOL.COM.BR', 'MTIzNDU2', parsedatetime('15-09-2019', 'dd-MM-yyyy'), 'F', 'Married', parsedatetime('20-05-1959', 'dd-MM-yyyy'), 1);
+insert into tbg_usuario (id, nome, email, senha, data_registro, genero, estado_civil, data_nascimento, endereco_id) 
+	values (2, 'USER OTHER', 'USER_OTHER@OUTLOOK.COM.BR', 'MTIzNDU2', parsedatetime('03-005-2012', 'dd-MM-yyyy'), 'Other', 'Divorced', parsedatetime('19-03-1974', 'dd-MM-yyyy'), 2);
 
 insert into tbg_usuario_telefones (usuario_id, telefone_id) values (1, 1);
 insert into tbg_usuario_telefones (usuario_id, telefone_id) values (1, 2);
