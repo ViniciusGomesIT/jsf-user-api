@@ -2,25 +2,95 @@
   "groups": [
     {
       "name": "messages",
-      "type": "br.com.api.controller.model.MessageModel",
-      "sourceType": "br.com.api.controller.model.MessageModel"
+      "type": "br.com.api.model.MessagePropertiesModel",
+      "sourceType": "br.com.api.model.MessagePropertiesModel"
+    },
+    {
+      "name": "spring.mail",
+      "type": "br.com.api.model.EmailProperties",
+      "sourceType": "br.com.api.model.EmailProperties"
     }
   ],
   "properties": [
     {
-      "name": "messages.error-to-generate-password-encrypt",
+      "name": "messages.email-does-not-match",
       "type": "java.lang.String",
-      "sourceType": "br.com.api.controller.model.MessageModel"
+      "sourceType": "br.com.api.model.MessagePropertiesModel"
+    },
+    {
+      "name": "messages.email-not-valid",
+      "type": "java.lang.String",
+      "sourceType": "br.com.api.model.MessagePropertiesModel"
+    },
+    {
+      "name": "messages.email-reminder-password-message",
+      "type": "java.lang.String",
+      "sourceType": "br.com.api.model.MessagePropertiesModel"
+    },
+    {
+      "name": "messages.email-send-error",
+      "type": "java.lang.String",
+      "sourceType": "br.com.api.model.MessagePropertiesModel"
+    },
+    {
+      "name": "messages.email-send-sucess",
+      "type": "java.lang.String",
+      "sourceType": "br.com.api.model.MessagePropertiesModel"
+    },
+    {
+      "name": "messages.error-to-generate-password-encrypted",
+      "type": "java.lang.String",
+      "sourceType": "br.com.api.model.MessagePropertiesModel"
     },
     {
       "name": "messages.generic-error",
       "type": "java.lang.String",
-      "sourceType": "br.com.api.controller.model.MessageModel"
+      "sourceType": "br.com.api.model.MessagePropertiesModel"
+    },
+    {
+      "name": "messages.generic-info",
+      "type": "java.lang.String",
+      "sourceType": "br.com.api.model.MessagePropertiesModel"
+    },
+    {
+      "name": "messages.old-password-does-not-match",
+      "type": "java.lang.String",
+      "sourceType": "br.com.api.model.MessagePropertiesModel"
+    },
+    {
+      "name": "messages.password-changed-sucess",
+      "type": "java.lang.String",
+      "sourceType": "br.com.api.model.MessagePropertiesModel"
+    },
+    {
+      "name": "messages.reset-password-email-subject",
+      "type": "java.lang.String",
+      "sourceType": "br.com.api.model.MessagePropertiesModel"
     },
     {
       "name": "messages.user-already-registered",
       "type": "java.lang.String",
-      "sourceType": "br.com.api.controller.model.MessageModel"
+      "sourceType": "br.com.api.model.MessagePropertiesModel"
+    },
+    {
+      "name": "messages.user-not-found",
+      "type": "java.lang.String",
+      "sourceType": "br.com.api.model.MessagePropertiesModel"
+    },
+    {
+      "name": "messages.wrong-password-or-email",
+      "type": "java.lang.String",
+      "sourceType": "br.com.api.model.MessagePropertiesModel"
+    },
+    {
+      "name": "spring.mail.password",
+      "type": "java.lang.String",
+      "sourceType": "br.com.api.model.EmailProperties"
+    },
+    {
+      "name": "spring.mail.username",
+      "type": "java.lang.String",
+      "sourceType": "br.com.api.model.EmailProperties"
     }
   ],
   "hints": []
