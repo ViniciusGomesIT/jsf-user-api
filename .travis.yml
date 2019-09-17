@@ -5,6 +5,6 @@ notifications:
 jdk:
 - oraclejdk8
 install:
-- mvn install
+- mvn clean install
 script:
 - mvn test
