@@ -43,12 +43,11 @@ spring:
           ssl:
             trust: smtp.gmail.com
   
-errorMessages:
+messages:
   genericError: Error
   genericInfo: Info
   errorToGeneratePasswordEncrypted: There was a error while trying to encrypt password
   userAlreadyRegistered: User already registered!
-  phoneAlreadyRegistered: One or more Phones already registered!
   wrongPasswordOrEmail: The given password or email does not match. 
   emailNotValid: The given email is not valid.
   emailDoesNotMatch: The emails are not the same.

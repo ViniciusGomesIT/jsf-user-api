@@ -5,8 +5,8 @@ import java.io.Serializable;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-@ConfigurationProperties(prefix = "errorMessages")
 @Component
+@ConfigurationProperties(prefix = "messages", ignoreUnknownFields = true)
 public class MessagePropertiesModel implements Serializable {
 
 	private static final long serialVersionUID = -7067557703562007762L;
@@ -15,7 +15,6 @@ public class MessagePropertiesModel implements Serializable {
 	private String genericInfo;
 	private String errorToGeneratePasswordEncrypted;
 	private String userAlreadyRegistered;
-	private String phoneAlreadyRegistered;
 	private String wrongPasswordOrEmail;
 	private String emailNotValid;
 	private String emailDoesNotMatch;
@@ -57,14 +56,6 @@ public class MessagePropertiesModel implements Serializable {
 
 	public void setUserAlreadyRegistered(String userAlreadyRegistered) {
 		this.userAlreadyRegistered = userAlreadyRegistered;
-	}
-
-	public String getPhoneAlreadyRegistered() {
-		return phoneAlreadyRegistered;
-	}
-
-	public void setPhoneAlreadyRegistered(String phoneAlreadyRegistered) {
-		this.phoneAlreadyRegistered = phoneAlreadyRegistered;
 	}
 
 	public String getWrongPasswordOrEmail() {

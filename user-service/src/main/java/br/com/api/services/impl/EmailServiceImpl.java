@@ -26,7 +26,7 @@ import br.com.api.services.interfaces.EmailService;
 public class EmailServiceImpl implements EmailService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(EmailServiceImpl.class);
 	
-	private MessagePropertiesModel message;
+	private MessagePropertiesModel messagePropertiesModel;
 	private EmailProperties emailProperties;
 	private JavaMailSender mailSender;
 	private UserRepository userRepository;
@@ -34,7 +34,7 @@ public class EmailServiceImpl implements EmailService {
 	@Inject
 	public EmailServiceImpl(MessagePropertiesModel message, EmailProperties emailProperties, 
 			JavaMailSender mailSender, UserRepository userRepository) {
-		this.message = message;
+		this.messagePropertiesModel = message;
 		this.emailProperties = emailProperties;
 		this.mailSender = mailSender;
 		this.userRepository = userRepository;
@@ -47,7 +47,7 @@ public class EmailServiceImpl implements EmailService {
 		Optional<UserEntity> userEntityOpt = this.userRepository.findByEmailIgnoreCase(email);
 		
 		if ( !userEntityOpt.isPresent() ) {
-			response.setErrorMessage(message.getEmailSendError());
+			response.setErrorMessage(messagePropertiesModel.getEmailSendError());
 			
 			return response;
 		}
@@ -65,9 +65,9 @@ public class EmailServiceImpl implements EmailService {
             return response;
         } catch (Exception e) {
         	LOGGER.error(Arrays.toString(e.getStackTrace()));
-        	FacesContext.getCurrentInstance().addMessage("EmailSenderService", new FacesMessage(message.getEmailSendError()));
+        	FacesContext.getCurrentInstance().addMessage("EmailSenderService", new FacesMessage(messagePropertiesModel.getEmailSendError()));
         	
-        	response.setErrorMessage(message.getEmailSendError());
+        	response.setErrorMessage(messagePropertiesModel.getEmailSendError());
         	
             return response;
         }
@@ -79,8 +79,8 @@ public class EmailServiceImpl implements EmailService {
 		mailMessage.setFrom(new String(Base64.getDecoder().decode(emailProperties.getUsername())));
 		mailMessage.setTo(userEntity.getEmail());
 		
-		mailMessage.setSubject(message.getResetPasswordEmailSubject());
-		mailMessage.setText(String.format(message.getEmailReminderPasswordMessage(), new String(Base64.getDecoder().decode(userEntity.getPassword()))));
+		mailMessage.setSubject(messagePropertiesModel.getResetPasswordEmailSubject());
+		mailMessage.setText(String.format(messagePropertiesModel.getEmailReminderPasswordMessage(), new String(Base64.getDecoder().decode(userEntity.getPassword()))));
 		
 		return mailMessage;
 	}
