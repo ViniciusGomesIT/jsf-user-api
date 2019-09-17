@@ -19,7 +19,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import br.com.api.entity.UserEntity;
-import br.com.api.model.MessageModel;
 import br.com.api.repository.UserRepository;
 import br.com.api.response.UserResponse;
 import br.com.api.utils.TestUtils;
@@ -33,9 +32,6 @@ public class LoginServiceImplTest {
 	
 	@Inject
 	private LoginServiceImpl loginService;
-	
-	@Inject
-	private MessageModel messageModel;
 	
 	@MockBean
 	private UserRepository userRepositoryMock;
@@ -71,6 +67,5 @@ public class LoginServiceImplTest {
 		response = loginService.authenticateUser(UTILS.generateOneOptionalUserEntity().get());
 		
 		assertThat(response.getUser().isPresent(), equalTo(false));
-		assertThat(response.getMessageError().matches(messageModel.getWrongPasswordOrEmail()), equalTo(true));
 	}
 }

@@ -22,7 +22,6 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import br.com.api.model.MessageModel;
 import br.com.api.repository.UserRepository;
 import br.com.api.services.interfaces.EmailService;
 import br.com.api.utils.ContextMocker;
@@ -40,8 +39,6 @@ public class EmailSenderControllerTest {
 
 	@Inject
 	private EmailSenderController emailSenderController;
-	@Inject
-	private MessageModel message;
 
 	@Mock
 	private EmailService serviceMock;
@@ -81,13 +78,15 @@ public class EmailSenderControllerTest {
 	public void emailSendWithoutValidEmailTest() {
 		ContextMocker.mockFacesContext();
 		
+		String error = "Some error message!";
+		
 		String email = "teste@email.com.br";
 		emailSenderController.setEmail(email);
 		
 		doNothing().when(mailSenderMock).send(Mockito.any(SimpleMailMessage.class));
 		
 		when(serviceMock.sendEmail(Mockito.anyString()))
-			.thenReturn(UTILS.generateOneEmailSenderResponse(false, message.getEmailSendError(), null));
+			.thenReturn(UTILS.generateOneEmailSenderResponse(false, error, null));
 
 		given(userRepositoryMock.findByEmailIgnoreCase(Mockito.anyString()))
 			.willReturn(Optional.empty());

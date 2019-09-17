@@ -21,7 +21,6 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import br.com.api.model.MessageModel;
 import br.com.api.repository.UserRepository;
 import br.com.api.response.EmailSenderResponse;
 import br.com.api.utils.TestUtils;
@@ -35,9 +34,6 @@ public class EmailServiceImplTest {
 	
 	@Inject
 	private EmailServiceImpl emailService;
-	
-	@Inject
-	MessageModel messageModel;
 	
 	@MockBean
 	private UserRepository userRespositoryMock;
@@ -81,7 +77,5 @@ public class EmailServiceImplTest {
 		
 		assertThat(response.getIsEmailSent(), equalTo(false));
 		assertThat(response.getMessageError().isEmpty(), equalTo(false));
-		assertThat(response.getMessageError().matches(messageModel.getEmailSendError()), equalTo(true));
 	}
-
 }
