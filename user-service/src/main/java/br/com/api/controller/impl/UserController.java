@@ -109,6 +109,12 @@ public class UserController implements UserResource, Serializable {
 		}
 	}
 	
+	public String newUser() {
+		this.saveUserRequest = new SaveUserRequest();
+		
+		return "/pages/register.jsf?faces-redirect=true";
+	}
+	
 	public SaveUserRequest getSaveUserRequest() {
 		return saveUserRequest;
 	}
