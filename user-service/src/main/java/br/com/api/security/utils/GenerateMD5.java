@@ -7,11 +7,11 @@ import java.util.Arrays;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import br.com.api.model.MessageModel;
+import br.com.api.model.MessagePropertiesModel;
 
 public class GenerateMD5 {
 	private static final Logger log = LoggerFactory.getLogger(GenerateMD5.class);
-	private static final MessageModel message = new MessageModel();
+	private static final MessagePropertiesModel message = new MessagePropertiesModel();
 	  
     public static String generate(String toMD5) {
   

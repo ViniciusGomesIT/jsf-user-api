@@ -5,9 +5,9 @@ import java.io.Serializable;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-@ConfigurationProperties(prefix = "messages")
+@ConfigurationProperties(prefix = "errorMessages")
 @Component
-public class MessageModel implements Serializable {
+public class MessagePropertiesModel implements Serializable {
 
 	private static final long serialVersionUID = -7067557703562007762L;
 

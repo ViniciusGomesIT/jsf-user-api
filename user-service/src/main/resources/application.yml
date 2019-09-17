@@ -43,7 +43,7 @@ spring:
           ssl:
             trust: smtp.gmail.com
   
-messages:
+errorMessages:
   genericError: Error
   genericInfo: Info
   errorToGeneratePasswordEncrypted: There was a error while trying to encrypt password

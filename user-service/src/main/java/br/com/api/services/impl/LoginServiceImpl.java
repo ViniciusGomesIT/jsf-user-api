@@ -9,7 +9,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import br.com.api.entity.UserEntity;
-import br.com.api.model.MessageModel;
+import br.com.api.model.MessagePropertiesModel;
 import br.com.api.repository.UserRepository;
 import br.com.api.response.UserResponse;
 import br.com.api.services.interfaces.LoginService;
@@ -20,11 +20,11 @@ public class LoginServiceImpl implements LoginService, Serializable {
 	private static final long serialVersionUID = 1508727838689411957L;
 	
 	private UserRepository userRepository;
-	private MessageModel message;
+	private MessagePropertiesModel message;
 	private UserResponse response;
 
 	@Inject
-	public LoginServiceImpl(UserRepository userRepository, MessageModel message) {
+	public LoginServiceImpl(UserRepository userRepository, MessagePropertiesModel message) {
 		this.userRepository = userRepository;
 		this.message = message;
 	}

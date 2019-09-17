@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.api.entity.UserEntity;
 import br.com.api.model.EmailProperties;
-import br.com.api.model.MessageModel;
+import br.com.api.model.MessagePropertiesModel;
 import br.com.api.repository.UserRepository;
 import br.com.api.response.EmailSenderResponse;
 import br.com.api.services.interfaces.EmailService;
@@ -26,13 +26,13 @@ import br.com.api.services.interfaces.EmailService;
 public class EmailServiceImpl implements EmailService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(EmailServiceImpl.class);
 	
-	private MessageModel message;
+	private MessagePropertiesModel message;
 	private EmailProperties emailProperties;
 	private JavaMailSender mailSender;
 	private UserRepository userRepository;
 	
 	@Inject
-	public EmailServiceImpl(MessageModel message, EmailProperties emailProperties, 
+	public EmailServiceImpl(MessagePropertiesModel message, EmailProperties emailProperties, 
 			JavaMailSender mailSender, UserRepository userRepository) {
 		this.message = message;
 		this.emailProperties = emailProperties;

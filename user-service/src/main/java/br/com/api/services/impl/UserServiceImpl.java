@@ -15,7 +15,7 @@ import br.com.api.builders.SaveUserRequestBuilder;
 import br.com.api.builders.UserEntityBuilder;
 import br.com.api.entity.AddressEntity;
 import br.com.api.entity.UserEntity;
-import br.com.api.model.MessageModel;
+import br.com.api.model.MessagePropertiesModel;
 import br.com.api.repository.UserRepository;
 import br.com.api.request.ResetPasswordRequest;
 import br.com.api.request.SaveUserRequest;
@@ -30,11 +30,11 @@ public class UserServiceImpl implements UserService, Serializable {
 	private static final long serialVersionUID = -6733962411945021876L;
 	
 	private UserRepository userRepository;
-	private MessageModel message;
+	private MessagePropertiesModel message;
 	private UserResponse userResponse;
 	
 	@Inject
-	public UserServiceImpl(UserRepository userRepository, MessageModel message) {
+	public UserServiceImpl(UserRepository userRepository, MessagePropertiesModel message) {
 		this.userRepository = userRepository;
 		this.message = message;
 	}

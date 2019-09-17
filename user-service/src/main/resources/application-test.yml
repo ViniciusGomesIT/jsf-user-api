@@ -21,7 +21,7 @@ spring:
     username: root
     password: 542865
   
-messages:
+errorMessages:
   genericError: Error
   genericInfo: Info
   errorToGeneratePasswordEncrypted: There was a error while trying to encrypt password
